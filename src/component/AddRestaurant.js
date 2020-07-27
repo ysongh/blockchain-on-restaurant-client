@@ -1,7 +1,31 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const AddRestaurant = () => {
     const [image, setImage] = useState('');
+    const [imageName, setImageName] = useState('');
+
+    const selectFile = e => {
+        if(e.target.files[0]){
+            setImage(e.target.files[0]);
+            setImageName(e.target.files[0].name);
+        }
+    }
+
+    const onSubmit = async () => {
+        try{
+            const formData = new FormData();
+            formData.append('image', image);
+
+            await axios.post('http://localhost:1000/api/restaurant', formData);
+
+            setImage('');
+            setImageName('');
+
+        } catch(err){
+            console.error(err);
+        }
+    }
 
     return(
         <div className="container">
@@ -14,11 +38,14 @@ const AddRestaurant = () => {
                         <input 
                             type="file"
                             className="custom-file-input"
-                            name="image"/>
-                        <label className="custom-file-label" htmlFor="inputGroupFile01">{image}</label>
+                            name="image"
+                            onChange={selectFile}/>
+                        <label className="custom-file-label" htmlFor="inputGroupFile01">{imageName}</label>
                     </div>
                 </div>
             </div>
+
+            <button className="btn btn-primary" onClick={onSubmit}>Create</button>
         </div>
     )
 }
