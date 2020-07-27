@@ -1,10 +1,12 @@
 import React from 'react';
+
 import './App.css';
+import AddRestaurant from './component/AddRestaurant';
 
 function App() {
   return (
     <div className="App">
-      <h1>Blockchain on Restaurant</h1>
+      <AddRestaurant />
     </div>
   );
 }
