@@ -1,13 +1,14 @@
 import React from 'react';
+import { BrowserRouter as Router, Route  } from 'react-router-dom';
 
 import './App.css';
 import AddRestaurant from './component/AddRestaurant';
 
 function App() {
   return (
-    <div className="App">
-      <AddRestaurant />
-    </div>
+    <Router className="App">
+      <Route exact path="/" component={AddRestaurant} />
+    </Router>
   );
 }
 
