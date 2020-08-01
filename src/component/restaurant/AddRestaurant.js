@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+
+import axios from '../../axios';
 
 const AddRestaurant = () => {
     const [image, setImage] = useState('');
@@ -17,7 +18,7 @@ const AddRestaurant = () => {
             const formData = new FormData();
             formData.append('image', image);
 
-            await axios.post('http://localhost:1000/api/restaurant', formData);
+            await axios.post('/restaurant', formData);
 
             setImage('');
             setImageName('');
