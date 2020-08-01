@@ -34,7 +34,7 @@ const Restaurant = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>
                                         <p className="card-text">{restaurant.location}</p>
-                                        <Link to="/" className="btn btn-primary">See Deals</Link>
+                                        <Link to={`/restaurant/${restaurant._id}`} className="btn btn-primary">See Deals</Link>
                                     </div>
                                 </div>
                             </div>
