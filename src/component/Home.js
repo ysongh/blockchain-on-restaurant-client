@@ -1,22 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import HeroImage from '../assets/hero.png';
+
 const Home = () => {
     return(
-        <>
-            <div className="mt-3 text-center">
-                <h1>Get rewards at restaurant</h1>
-                <p>Earn coins when you dine or order meals at any participating restaurants</p>
-                <div>
-                    <Link to="/" className="btn btn-primary mr-3">
-                        Get Started
-                    </Link>
-                    <Link to="/restaurant" className="btn btn-secondary">
-                        See Deals
-                    </Link>
+        <div className="container">
+            <div className="row">
+                <div className="col-12 col-md-6 mt-3">
+                    <h1 className="mt-5 mb-3">Get rewards at restaurant</h1>
+                    <p className="mb-4">Earn coins when you dine or order meals at any participating restaurants</p>
+                    <div>
+                        <Link to="/" className="btn btn-primary mr-3">
+                            Get Started
+                        </Link>
+                        <Link to="/restaurant" className="btn btn-secondary">
+                            See Deals
+                        </Link>
+                    </div>
+                </div>
+                <div className="col-12 col-md-6">
+                    <img src={HeroImage} alt="Hero" />
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
