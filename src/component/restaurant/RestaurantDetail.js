@@ -45,7 +45,7 @@ const RestaurantDetail = () => {
                     data.deals.map(deal => {
                         return(
                             <div className="col-12 col-md-6 col-lg-4" key={deal._id}>
-                                <div className="card">
+                                <div className="card mb-3">
                                     <img className="card-img-top" src={deal.image} alt="Deal" />
                                     <div className="card-body">
                                         <h5 className="card-title">{deal.name}</h5>

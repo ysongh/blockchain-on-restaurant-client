@@ -7,6 +7,7 @@ import Home from './component/Home';
 import Restaurants from './component/restaurant/Restaurants';
 import RestaurantDetail from './component/restaurant/RestaurantDetail';
 import AddRestaurant from './component/restaurant/AddRestaurant';
+import Deals from './component/deal/Deals';
 import AddDeal from './component/deal/AddDeal';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Router className="App">
       <Navbar />
       <Route exact path="/" component={Home} />
+      <Route exact path="/deal" component={Deals} />
       <Route exact path="/restaurant" component={Restaurants} />
       <Route exact path="/addrestaurant" component={AddRestaurant} />
       <Route exact path="/restaurant/:id" component={RestaurantDetail} />
