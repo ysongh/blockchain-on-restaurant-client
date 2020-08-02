@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
+import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
 
@@ -35,8 +36,10 @@ const RestaurantDetail = () => {
                 <div className="col-12 col-md-6">
                     <p>{data.location}</p>
                     <p>{data.description}</p>
+                    <Link to={`/restaurant/${id}/adddeal`} className="btn btn-primary">Add Deal</Link>
                 </div>
             </div>
+            <hr />
             <div className="row">
                 { data.deals.length ? (
                     data.deals.map(deal => {

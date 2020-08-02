@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
+import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import TextInput from '../common/TextInput';
 
-const AddRestaurant = () => {
+const AddDeal = () => {
     const history = useHistory();
+    const { id } =  useParams();
 
     const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
+    const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [imageName, setImageName] = useState('');
@@ -24,13 +26,13 @@ const AddRestaurant = () => {
         try{
             const formData = new FormData();
             formData.append('name', name);
-            formData.append('location', location);
+            formData.append('price', price);
             formData.append('description', description);
             formData.append('image', image);
 
-            await axios.post('/restaurant', formData);
+            await axios.post(`/deal/${id}`, formData);
 
-            history.push('/restaurant');
+            history.push(`/restaurant/${id}`);
 
         } catch(err){
             console.error(err);
@@ -39,7 +41,7 @@ const AddRestaurant = () => {
 
     return(
         <div className="container">
-            <h1 className="mt-2">Add Restaurant</h1>
+            <h1 className="mt-2">Add Deal</h1>
 
             <div className="form-group">
                 <div className="row">
@@ -50,10 +52,10 @@ const AddRestaurant = () => {
                             value={name}
                             onChange={e => setName(e.target.value)} />
                         <TextInput
-                            label="Location"
-                            type="text"
-                            value={location}
-                            onChange={e => setLocation(e.target.value)} />
+                            label="Price"
+                            type="number"
+                            value={price}
+                            onChange={e => setPrice(e.target.value)} />
                         <TextInput
                             label="description"
                             type="text"
@@ -82,4 +84,4 @@ const AddRestaurant = () => {
     )
 }
 
-export default AddRestaurant;
+export default AddDeal;
