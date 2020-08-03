@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
+import DefaultImage from '../../assets/noimage.png';
 
 const RestaurantDetail = () => {
     const { id } =  useParams();
@@ -46,7 +47,7 @@ const RestaurantDetail = () => {
                         return(
                             <div className="col-12 col-md-6 col-lg-4" key={deal._id}>
                                 <div className="card mb-3">
-                                    <img className="card-img-top" src={deal.image} alt="Deal" />
+                                    <img className="card-img-top" src={deal.image || DefaultImage} alt="Deal" />
                                     <div className="card-body">
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.price}</p>

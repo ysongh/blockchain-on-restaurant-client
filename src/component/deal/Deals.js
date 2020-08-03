@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
 import Alert from '../common/Alert';
+import DefaultImage from '../../assets/noimage.png';
 
 const Deals = () => {
     const [data, setData] = useState([]);
@@ -34,7 +35,7 @@ const Deals = () => {
                         return(
                             <div className="col-12 col-md-6 col-lg-4" key={restaurant._id}>
                                 <div className="card mb-3">
-                                    <img className="card-img-top" src={restaurant.image} alt="Restaurant" />
+                                    <img className="card-img-top" src={restaurant.image || DefaultImage} alt="Restaurant" />
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>
                                         <p className="card-text">{restaurant.location}</p>
