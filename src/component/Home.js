@@ -11,10 +11,10 @@ const Home = () => {
                     <h1 className="mt-5 mb-3">Get rewards at restaurant</h1>
                     <p className="mb-4">Earn coins when you dine or order meals at any participating restaurants</p>
                     <div>
-                        <Link to="/" className="btn btn-primary mr-3">
+                        <Link to="/" className="btn primary-color mr-3">
                             Get Started
                         </Link>
-                        <Link to="/restaurant" className="btn btn-secondary">
+                        <Link to="/restaurant" className="btn secondary-color">
                             See Deals
                         </Link>
                     </div>

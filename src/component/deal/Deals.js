@@ -40,7 +40,7 @@ const Deals = () => {
                                         <h5 className="card-title">{restaurant.name}</h5>
                                         <p className="card-text">{restaurant.location}</p>
                                         <div className="d-flex justify-content-between">
-                                            <Link to={`/restaurant/${restaurant.restaurant}`} className="btn btn-primary">See Restaurant</Link>
+                                            <Link to={`/restaurant/${restaurant.restaurant}`} className="btn primary-color">See Restaurant</Link>
                                             <p className="h5">${restaurant.price}</p>
                                         </div>
                                     </div>

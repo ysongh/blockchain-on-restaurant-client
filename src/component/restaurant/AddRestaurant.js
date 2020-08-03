@@ -77,7 +77,7 @@ const AddRestaurant = () => {
                 
             </div>
 
-            <button className="btn btn-primary" onClick={onSubmit}>Create</button>
+            <button className="btn btn-lg primary-color " onClick={onSubmit}>Create</button>
         </div>
     )
 }

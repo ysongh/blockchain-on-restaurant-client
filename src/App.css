@@ -5,3 +5,6 @@ img{
 .logo{
     width: 130px;
 }
+
+.primary-color{ background-color: #FFD460 !important; }
+.secondary-color{ background-color: #F07B3F !important; }

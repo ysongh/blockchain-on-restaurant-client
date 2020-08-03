@@ -37,7 +37,7 @@ const RestaurantDetail = () => {
                 <div className="col-12 col-md-6">
                     <p>{data.location}</p>
                     <p>{data.description}</p>
-                    <Link to={`/restaurant/${id}/adddeal`} className="btn btn-primary">Add Deal</Link>
+                    <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
                 </div>
             </div>
             <hr />
