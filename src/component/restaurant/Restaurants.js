@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
+import Alert from '../common/Alert';
 
 const Restaurant = () => {
     const [data, setData] = useState([]);
+    const [error, setError] = useState("");
     const [go] = useState(true);
 
     useEffect(() => {
@@ -14,6 +16,7 @@ const Restaurant = () => {
     
                 setData(data.data);
             } catch(err){
+                setError("Something went wrong with server. Try again later.");
                 console.error(err);
             }
         }
@@ -23,13 +26,14 @@ const Restaurant = () => {
 
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <h1 className="text-center">Restaurant</h1>
             <div className="row">
                 { data.length ? (
                     data.map(restaurant => {
                         return(
                             <div className="col-12 col-md-6 col-lg-4" key={restaurant._id}>
-                                <div className="card">
+                                <div className="card  mb-3">
                                     <img className="card-img-top" src={restaurant.image} alt="Restaurant" />
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>

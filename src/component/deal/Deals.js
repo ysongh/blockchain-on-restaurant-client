@@ -2,19 +2,21 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
+import Alert from '../common/Alert';
 
 const Deals = () => {
     const [data, setData] = useState([]);
+    const [error, setError] = useState("");
     const [go] = useState(true);
 
     useEffect(() => {
         async function getRestaurants() {
             try{
                 const { data } = await axios.get('/deal');
-                console.log(data)
     
                 setData(data.data);
             } catch(err){
+                setError("Something went wrong with server. Try again later.");
                 console.error(err);
             }
         }
@@ -24,6 +26,7 @@ const Deals = () => {
 
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <h1 className="text-center">Deals</h1>
             <div className="row">
                 { data.length ? (
