@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route  } from 'react-router-dom';
 
 import './App.css';
 import Navbar from './component/layout/Navbar';
+import Footer from './component/layout/Footer';
 import Home from './component/Home';
 import Restaurants from './component/restaurant/Restaurants';
 import RestaurantDetail from './component/restaurant/RestaurantDetail';
@@ -20,6 +21,7 @@ function App() {
       <Route exact path="/addrestaurant" component={AddRestaurant} />
       <Route exact path="/restaurant/:id" component={RestaurantDetail} />
       <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
+      <Footer />
     </Router>
   );
 }
