@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import TextInput from '../common/TextInput';
+import Loading from '../common/Loading';
 
 const AddDeal = () => {
     const history = useHistory();
@@ -14,6 +15,7 @@ const AddDeal = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [imageName, setImageName] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const selectFile = e => {
         if(e.target.files[0]){
@@ -24,6 +26,8 @@ const AddDeal = () => {
 
     const onSubmit = async () => {
         try{
+            setLoading(true);
+
             const formData = new FormData();
             formData.append('name', name);
             formData.append('price', price);
@@ -35,6 +39,7 @@ const AddDeal = () => {
             history.push(`/restaurant/${id}`);
 
         } catch(err){
+            setLoading(false);
             console.error(err);
         }
     }
@@ -79,7 +84,7 @@ const AddDeal = () => {
                 
             </div>
 
-            <button className="btn btn-lg primary-color" onClick={onSubmit}>Create</button>
+            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>Create Deal</button> }
         </div>
     )
 }

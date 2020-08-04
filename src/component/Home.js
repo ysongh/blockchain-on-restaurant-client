@@ -6,7 +6,7 @@ import HeroImage from '../assets/hero.png';
 const Home = () => {
     return(
         <div className="container">
-            <div className="row">
+            <div className="row hero">
                 <div className="col-12 col-md-6 mt-3">
                     <h1 className="mt-5 mb-3">Get rewards at restaurant</h1>
                     <p className="mb-4">Earn coins when you dine or order meals at any participating restaurants</p>

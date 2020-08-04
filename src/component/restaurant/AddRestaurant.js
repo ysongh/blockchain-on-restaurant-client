@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import TextInput from '../common/TextInput';
+import Loading from '../common/Loading';
 
 const AddRestaurant = () => {
     const history = useHistory();
@@ -12,6 +13,7 @@ const AddRestaurant = () => {
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
     const [imageName, setImageName] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const selectFile = e => {
         if(e.target.files[0]){
@@ -22,6 +24,8 @@ const AddRestaurant = () => {
 
     const onSubmit = async () => {
         try{
+            setLoading(true);
+
             const formData = new FormData();
             formData.append('name', name);
             formData.append('location', location);
@@ -33,6 +37,7 @@ const AddRestaurant = () => {
             history.push('/restaurant');
 
         } catch(err){
+            setLoading(false);
             console.error(err);
         }
     }
@@ -77,7 +82,7 @@ const AddRestaurant = () => {
                 
             </div>
 
-            <button className="btn btn-lg primary-color " onClick={onSubmit}>Create</button>
+            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>Create Restaurant</button> }
         </div>
     )
 }
