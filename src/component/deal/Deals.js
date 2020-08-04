@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
 import Alert from '../common/Alert';
+import Spinner from '../common/Spinner';
 import DefaultImage from '../../assets/noimage.png';
 
 const Deals = () => {
@@ -48,8 +49,9 @@ const Deals = () => {
                             </div>
                         )
                     })
-                ) : <p>No Restaurant</p>}
+                ) : null}
             </div>
+            {!data.length && <Spinner />}
         </div>
     );
 };
