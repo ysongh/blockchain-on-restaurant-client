@@ -2,6 +2,10 @@ img{
     width: 100%;
 }
 
+.main{
+    min-height: 80vh;
+}
+
 .logo{
     width: 130px;
 }

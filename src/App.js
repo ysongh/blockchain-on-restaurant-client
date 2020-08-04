@@ -15,12 +15,14 @@ function App() {
   return (
     <Router className="App">
       <Navbar />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/deal" component={Deals} />
-      <Route exact path="/restaurant" component={Restaurants} />
-      <Route exact path="/addrestaurant" component={AddRestaurant} />
-      <Route exact path="/restaurant/:id" component={RestaurantDetail} />
-      <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
+      <main className="main">
+        <Route exact path="/" component={Home} />
+        <Route exact path="/deal" component={Deals} />
+        <Route exact path="/restaurant" component={Restaurants} />
+        <Route exact path="/addrestaurant" component={AddRestaurant} />
+        <Route exact path="/restaurant/:id" component={RestaurantDetail} />
+        <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
+      </main>
       <Footer />
     </Router>
   );
