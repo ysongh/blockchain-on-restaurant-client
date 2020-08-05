@@ -10,5 +10,11 @@ img{
     width: 130px;
 }
 
+.icon{
+    width: 50px;
+    display: block;
+    margin: auto;
+}
+
 .primary-color{ background-color: #FFD460 !important; }
 .secondary-color{ background-color: #F07B3F !important; }
