@@ -10,6 +10,7 @@ import RestaurantDetail from './component/restaurant/RestaurantDetail';
 import AddRestaurant from './component/restaurant/AddRestaurant';
 import Deals from './component/deal/Deals';
 import AddDeal from './component/deal/AddDeal';
+import Coin from './component/Coin';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route exact path="/addrestaurant" component={AddRestaurant} />
         <Route exact path="/restaurant/:id" component={RestaurantDetail} />
         <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
+        <Route exact path="/coin" component={Coin} />
       </main>
       <Footer />
     </Router>
