@@ -3,7 +3,7 @@ import Web3 from 'web3';
 
 import {EATOUTTOKEN_ABI, EATOUTTOKEN_ADDRESS} from '../config';
 import TextInput from './common/TextInput';
-import Loading from './common/Loading';
+import Spinner from './common/Spinner';
 
 class Coin extends Component{
   constructor(props){
@@ -36,12 +36,20 @@ class Coin extends Component{
 
   onSubmit(){
     try{
+      this.setState({ loading : true });
       this.state.eatOutToken.methods.transfer(this.state.address, this.state.amount).send({ from: this.state.account })
         .once('receipt', (receipt) => {
           console.log(receipt);
+          this.setState({
+            loading: false,
+            balance: this.state.balance - this.state.amount,
+            address: '',
+            amount: ''
+          });
         })
     } catch(err){
       console.log(err)
+      this.setState({ loading : false });
     }
   }
 
@@ -65,7 +73,7 @@ class Coin extends Component{
           type="text"
           value={this.state.amount}
           onChange={e => this.setState({ amount: e.target.value })} />
-        <button className="btn btn-lg primary-color " onClick={this.onSubmit.bind(this)}>Send Coin</button>
+        {this.state.loading ? <Spinner /> : <button className="btn btn-lg primary-color " onClick={this.onSubmit.bind(this)}>Send Coin</button> }
       </div>
     );
   }
