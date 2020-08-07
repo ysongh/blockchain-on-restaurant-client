@@ -12,7 +12,7 @@ const AddRestaurant = () => {
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const [imageName, setImageName] = useState('');
+    const [imageName, setImageName] = useState('Choose File');
     const [loading, setLoading] = useState(false);
 
     const selectFile = e => {
