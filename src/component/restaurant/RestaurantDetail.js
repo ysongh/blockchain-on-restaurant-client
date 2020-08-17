@@ -15,8 +15,6 @@ const RestaurantDetail = () => {
         async function getRestaurants() {
             try{
                 const { data } = await axios.get('/restaurant/' + id);
-
-                console.log(data.data)
     
                 setData(data.data);
             } catch(err){
@@ -25,7 +23,7 @@ const RestaurantDetail = () => {
         }
         
         getRestaurants();
-    }, [go]);
+    }, [go, id]);
 
     return(
         <div className="container">
