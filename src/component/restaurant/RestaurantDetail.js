@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import DefaultImage from '../../assets/noimage.png';
 
 const RestaurantDetail = () => {
     const { id } =  useParams();
+    const history = useHistory();
 
     const [data, setData] = useState({deals: []});
     const [go] = useState(true);
@@ -25,6 +26,15 @@ const RestaurantDetail = () => {
         getRestaurants();
     }, [go, id]);
 
+    const removeRestaurant = async () => {
+        try{
+            await axios.delete('/restaurant/' + id);
+            history.push('/restaurant');
+        } catch(err){
+            console.error(err);
+        }
+    }
+
     return(
         <div className="container">
             <h1 className="text-center">{data.name}</h1>
@@ -36,6 +46,7 @@ const RestaurantDetail = () => {
                     <p>{data.location}</p>
                     <p>{data.description}</p>
                     <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
+                    <button className="btn btn-danger" onClick={() => removeRestaurant()}>Remove Restaurant</button>
                 </div>
             </div>
             <hr />
