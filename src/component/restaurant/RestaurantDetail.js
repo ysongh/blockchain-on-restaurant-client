@@ -35,6 +35,14 @@ const RestaurantDetail = () => {
         }
     }
 
+    const removeDeal = async (dealId) => {
+        try{
+            await axios.delete(`/deal/${id}/${dealId}`);
+        } catch(err){
+            console.error(err);
+        }
+    }
+
     return(
         <div className="container">
             <h1 className="text-center">{data.name}</h1>
@@ -61,6 +69,7 @@ const RestaurantDetail = () => {
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.price}</p>
                                         <p className="card-text">{deal.description}</p>
+                                        <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
                                     </div>
                                 </div>
                             </div>
