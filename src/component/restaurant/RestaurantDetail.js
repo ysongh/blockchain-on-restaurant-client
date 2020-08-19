@@ -54,6 +54,7 @@ const RestaurantDetail = () => {
                     <p>{data.location}</p>
                     <p>{data.description}</p>
                     <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
+                    <Link to={`/addrestaurant/${id}`} className="btn btn-info">Edit Restaurant</Link>
                     <button className="btn btn-danger" onClick={() => removeRestaurant()}>Remove Restaurant</button>
                 </div>
             </div>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
@@ -6,6 +7,7 @@ import TextInput from '../common/TextInput';
 import Loading from '../common/Loading';
 
 const AddRestaurant = () => {
+    const { id } =  useParams();
     const history = useHistory();
 
     const [name, setName] = useState('');
@@ -14,6 +16,24 @@ const AddRestaurant = () => {
     const [image, setImage] = useState('');
     const [imageName, setImageName] = useState('Choose File');
     const [loading, setLoading] = useState(false);
+    const [go] = useState(true);
+
+    useEffect(() => {
+        async function getRestaurantInfo() {
+            try{
+                const { data } = await axios.get('/restaurant/' + id);
+
+                setName(data.data.name || '');
+                setLocation(data.data.location || '');
+                setDescription(data.data.description || '');
+            } catch(err){
+                console.error(err);
+            }
+        }
+        
+        if(id) getRestaurantInfo();
+
+    }, [go, id]);
 
     const selectFile = e => {
         if(e.target.files[0]){
@@ -32,9 +52,13 @@ const AddRestaurant = () => {
             formData.append('description', description);
             formData.append('image', image);
 
-            await axios.post('/restaurant', formData);
-
-            history.push('/restaurant');
+            if(id){
+                await axios.put('/restaurant/' + id, formData);
+                history.push('/restaurant');
+            } else{
+                await axios.post('/restaurant', formData);
+                history.push('/restaurant');
+            }
 
         } catch(err){
             setLoading(false);
@@ -44,7 +68,7 @@ const AddRestaurant = () => {
 
     return(
         <div className="container">
-            <h1 className="mt-2">Add Restaurant</h1>
+            <h1 className="mt-2">{id ? "Edit" : "Add"} Restaurant</h1>
 
             <div className="form-group">
                 <div className="row">
@@ -82,7 +106,7 @@ const AddRestaurant = () => {
                 
             </div>
 
-            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>Create Restaurant</button> }
+            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>{id ? "Update" : "Create Restaurant"}</button> }
         </div>
     )
 }
