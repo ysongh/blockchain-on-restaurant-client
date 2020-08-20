@@ -70,6 +70,7 @@ const RestaurantDetail = () => {
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.price}</p>
                                         <p className="card-text">{deal.description}</p>
+                                        <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
                                         <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
                                     </div>
                                 </div>

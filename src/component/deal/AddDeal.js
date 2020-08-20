@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ import Loading from '../common/Loading';
 
 const AddDeal = () => {
     const history = useHistory();
-    const { id } =  useParams();
+    const { id, dealid } =  useParams();
 
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
@@ -16,6 +16,24 @@ const AddDeal = () => {
     const [image, setImage] = useState('');
     const [imageName, setImageName] = useState('Choose File');
     const [loading, setLoading] = useState(false);
+    const [go] = useState(true);
+
+    useEffect(() => {
+        async function getDealInfo() {
+            try{
+                const { data } = await axios.get(`/deal/${id}/${dealid}`);
+
+                setName(data.data.name || '');
+                setPrice(data.data.price || '');
+                setDescription(data.data.description || '');
+            } catch(err){
+                console.error(err);
+            }
+        }
+        
+        if(dealid) getDealInfo();
+
+    }, [go, id]);
 
     const selectFile = e => {
         if(e.target.files[0]){
@@ -34,7 +52,11 @@ const AddDeal = () => {
             formData.append('description', description);
             formData.append('image', image);
 
-            await axios.post(`/deal/${id}`, formData);
+            if(dealid){
+                await axios.put(`/deal/${id}/${dealid}`, formData);
+            } else{
+                await axios.post(`/deal/${id}`, formData);
+            }
 
             history.push(`/restaurant/${id}`);
 
@@ -46,7 +68,7 @@ const AddDeal = () => {
 
     return(
         <div className="container">
-            <h1 className="mt-2">Add Deal</h1>
+            <h1 className="mt-2">{dealid ? "Edit" : "Add"} Deal</h1>
 
             <div className="form-group">
                 <div className="row">
@@ -84,7 +106,7 @@ const AddDeal = () => {
                 
             </div>
 
-            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>Create Deal</button> }
+            {loading ? <Loading /> : <button className="btn btn-lg primary-color " onClick={onSubmit}>{id ? "Update" : "Create Deal"}</button> }
         </div>
     )
 }
