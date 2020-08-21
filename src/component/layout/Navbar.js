@@ -27,9 +27,9 @@ const Navbar = () => {
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
                         </li>
-                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                        {/* <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Coin</Link>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
