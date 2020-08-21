@@ -33,7 +33,7 @@ const AddDeal = () => {
         
         if(dealid) getDealInfo();
 
-    }, [go, id]);
+    }, [go, id, dealid]);
 
     const selectFile = e => {
         if(e.target.files[0]){

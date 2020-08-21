@@ -43,6 +43,7 @@ const Restaurant = () => {
                                         <h5 className="card-title">{restaurant.name}</h5>
                                         <p className="card-text">{restaurant.location}</p>
                                         <Link to={`/restaurant/${restaurant._id}`} className="btn primary-color">See Deals</Link>
+                                        <p class="card-text"><small class="text-muted">{restaurant.date}</small></p>
                                     </div>
                                 </div>
                             </div>
