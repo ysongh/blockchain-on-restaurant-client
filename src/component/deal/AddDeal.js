@@ -13,11 +13,12 @@ const AddDeal = () => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
-    const [image, setImage] = useState('');
+    const [imageFile, setImageFile] = useState('');
     const [imageName, setImageName] = useState('Choose File');
     const [loading, setLoading] = useState(false);
+    const [preview, setPreview] = useState();
     const [go] = useState(true);
-
+    
     useEffect(() => {
         async function getDealInfo() {
             try{
@@ -35,11 +36,25 @@ const AddDeal = () => {
 
     }, [go, id, dealid]);
 
-    const selectFile = e => {
-        if(e.target.files[0]){
-            setImage(e.target.files[0]);
-            setImageName(e.target.files[0].name);
+    useEffect(() => {
+        if(!imageFile){
+            setPreview(undefined);
+            return;
         }
+
+        const objectUrl = URL.createObjectURL(imageFile);
+        setPreview(objectUrl);
+
+        return () => URL.revokeObjectURL(objectUrl);
+    }, [imageFile]);
+
+    const selectFile = e => {
+        if(!e.target.files || e.target.files.length === 0){
+            setImageFile(undefined);
+            return;
+        }
+        setImageFile(e.target.files[0]);
+        setImageName(e.target.files[0].name);
     }
 
     const onSubmit = async () => {
@@ -50,7 +65,7 @@ const AddDeal = () => {
             formData.append('name', name);
             formData.append('price', price);
             formData.append('description', description);
-            formData.append('image', image);
+            formData.append('image', imageFile);
 
             if(dealid){
                 await axios.put(`/deal/${id}/${dealid}`, formData);
@@ -101,6 +116,7 @@ const AddDeal = () => {
                                 <label className="custom-file-label" htmlFor="inputGroupFile01">{imageName}</label>
                             </div>
                         </div>
+                        {imageFile && <img src={preview} alt="Preview" /> }
                     </div>
                 </div>
                 
