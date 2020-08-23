@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import TextInput from '../common/TextInput';
+import TextArea from '../common/TextArea';
 import Loading from '../common/Loading';
 
 const AddDeal = () => {
@@ -98,8 +99,8 @@ const AddDeal = () => {
                             type="number"
                             value={price}
                             onChange={e => setPrice(e.target.value)} />
-                        <TextInput
-                            label="description"
+                        <TextArea
+                            label="Description"
                             type="text"
                             value={description}
                             onChange={e => setDescription(e.target.value)} />

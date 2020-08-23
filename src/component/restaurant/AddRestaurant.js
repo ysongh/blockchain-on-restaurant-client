@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import TextInput from '../common/TextInput';
+import TextArea from '../common/TextArea';
 import Loading from '../common/Loading';
 
 const AddRestaurant = () => {
@@ -98,8 +99,8 @@ const AddRestaurant = () => {
                             type="text"
                             value={location}
                             onChange={e => setLocation(e.target.value)} />
-                        <TextInput
-                            label="description"
+                        <TextArea
+                            label="Description"
                             type="text"
                             value={description}
                             onChange={e => setDescription(e.target.value)} />
