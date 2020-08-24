@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
+import Modal from '../common/Modal';
 import DefaultImage from '../../assets/noimage.png';
 
 const RestaurantDetail = () => {
@@ -55,7 +56,7 @@ const RestaurantDetail = () => {
                     <p>{data.description}</p>
                     <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
                     <Link to={`/addrestaurant/${id}`} className="btn btn-info">Edit Restaurant</Link>
-                    <button className="btn btn-danger" onClick={() => removeRestaurant()}>Remove Restaurant</button>
+                    <button className="btn btn-danger" data-toggle="modal" data-target="#modal">Remove Restaurant</button>
                 </div>
             </div>
             <hr />
@@ -80,6 +81,7 @@ const RestaurantDetail = () => {
                     })
                 ) : <p className="mt-5 h4 text-danger">No Deals</p>}
             </div>
+            <Modal onClick={() => removeRestaurant()} />
         </div>
     );
 };
