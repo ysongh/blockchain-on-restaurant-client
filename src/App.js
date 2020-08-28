@@ -6,6 +6,7 @@ import Navbar from './component/layout/Navbar';
 import Footer from './component/layout/Footer';
 import Home from './component/Home';
 import Register from './component/auth/Register';
+import Login from './component/auth/Login';
 import Restaurants from './component/restaurant/Restaurants';
 import RestaurantDetail from './component/restaurant/RestaurantDetail';
 import AddRestaurant from './component/restaurant/AddRestaurant';
@@ -20,6 +21,7 @@ function App() {
       <main className="main">
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
         <Route exact path="/deal" component={Deals} />
         <Route exact path="/restaurant" component={Restaurants} />
         <Route exact path="/addrestaurant/:id" component={AddRestaurant} />
