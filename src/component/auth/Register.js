@@ -1,5 +1,6 @@
 import React, { useState }from 'react';
 
+import axios from '../../axios';
 import Background1 from '../../assets/background1.png';
 import TextInput from '../common/TextInput';
 
@@ -7,6 +8,21 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const registerOwner = async () => {
+        try{
+            const ownerData = {
+                name,
+                email,
+                password
+            }
+
+            const res = await axios.post('/owner/register', ownerData);
+            console.log(res)
+        } catch(err){
+            console.error(err);
+        }
+    }
     
     return(
         <div className="container">
@@ -32,7 +48,7 @@ const Register = () => {
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)} />
-                         <button className="btn btn-lg primary-color">Sign Up</button>
+                         <button className="btn btn-lg primary-color" onClick={() => registerOwner()}>Sign Up</button>
                     </div>
                 </div>
             </div>
