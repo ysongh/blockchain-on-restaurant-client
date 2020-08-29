@@ -1,4 +1,5 @@
 import React, { useState }from 'react';
+import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
 import Background2 from '../../assets/background2.png';
@@ -41,7 +42,11 @@ const Login = () => {
                             type="password"
                             value={password}
                             onChange={e => setPassword(e.target.value)} />
-                         <button className="btn btn-lg primary-color" onClick={() => loginOwner()}>Login</button>
+                        <button className="btn btn-lg primary-color" onClick={() => loginOwner()}>Login</button>
+                        
+                        <p className="mt-3">
+                            Dont have an account? <Link to="/register">Sign Up</Link>
+                        </p>
                     </div>
                 </div>
             </div>
