@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route  } from 'react-router-dom';
 
 import './App.css';
+import { GlobalProvider } from './context/GlobalState';
 import Navbar from './component/layout/Navbar';
 import Footer from './component/layout/Footer';
 import Home from './component/Home';
@@ -16,23 +17,25 @@ import AddDeal from './component/deal/AddDeal';
 
 function App() {
   return (
-    <Router className="App">
-      <Navbar />
-      <main className="main">
-        <Route exact path="/" component={Home} />
-        <Route exact path="/register" component={Register} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/deal" component={Deals} />
-        <Route exact path="/restaurant" component={Restaurants} />
-        <Route exact path="/addrestaurant/:id" component={AddRestaurant} />
-        <Route exact path="/addrestaurant/" component={AddRestaurant} />
-        <Route exact path="/restaurant/:id" component={RestaurantDetail} />
-        <Route exact path="/restaurant/:id/adddeal/:dealid" component={AddDeal} />
-        <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
-        {/* <Route exact path="/coin" component={Coin} /> */}
-      </main>
-      <Footer />
-    </Router>
+    <GlobalProvider>
+      <Router className="App">
+        <Navbar />
+        <main className="main">
+          <Route exact path="/" component={Home} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/deal" component={Deals} />
+          <Route exact path="/restaurant" component={Restaurants} />
+          <Route exact path="/addrestaurant/:id" component={AddRestaurant} />
+          <Route exact path="/addrestaurant/" component={AddRestaurant} />
+          <Route exact path="/restaurant/:id" component={RestaurantDetail} />
+          <Route exact path="/restaurant/:id/adddeal/:dealid" component={AddDeal} />
+          <Route exact path="/restaurant/:id/adddeal" component={AddDeal} />
+          {/* <Route exact path="/coin" component={Coin} /> */}
+        </main>
+        <Footer />
+      </Router>
+    </GlobalProvider>
   );
 }
 
