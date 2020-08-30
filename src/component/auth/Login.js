@@ -1,11 +1,14 @@
-import React, { useState }from 'react';
+import React, { useState, useContext }from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
+import { GlobalContext } from '../../context/GlobalState';
 import Background2 from '../../assets/background2.png';
 import TextInput from '../common/TextInput';
 
 const Login = () => {
+    const { saveToken } = useContext(GlobalContext);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -16,8 +19,8 @@ const Login = () => {
                 password
             }
 
-            const res = await axios.put('/owner/login', ownerData);
-            console.log(res)
+            const { data } = await axios.put('/owner/login', ownerData);
+            saveToken(data.token);
         } catch(err){
             console.error(err);
         }
