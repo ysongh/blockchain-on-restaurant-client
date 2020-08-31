@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logo.png';
+import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = () => {
+    const { token } = useContext(GlobalContext);
+
+    const UserLinks = (
+        <>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
+            </li>
+        </>
+    );
+
+    const GuestLinks = (
+        <>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link" to="/login">Login</Link>
+            </li>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link" to="/register">Get Started</Link>
+            </li>
+        </>
+    )
+
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <div className="container">
@@ -24,15 +46,8 @@ const Navbar = () => {
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/restaurant">Restaurant</Link>
                         </li>
-                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                            <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
-                        </li>
-                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                            <Link className="nav-link" to="/login">Login</Link>
-                        </li>
-                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                            <Link className="nav-link" to="/register">Get Started</Link>
-                        </li>
+                        { token ? UserLinks : GuestLinks }
+                        
                         {/* <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Coin</Link>
                         </li> */}
