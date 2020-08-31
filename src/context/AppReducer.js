@@ -5,6 +5,11 @@ export default (state, action) => {
                 ...state,
                 token: action.payload
             }
+        case "LOGOUT":
+            return{
+                ...state,
+                token: ''
+            }
         default:
             return state;
     }

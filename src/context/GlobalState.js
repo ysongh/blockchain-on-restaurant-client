@@ -17,11 +17,17 @@ export const GlobalProvider = ({ children }) => {
             payload: token
         })
     }
+    function logout(){
+        dispatch({
+            type: "LOGOUT"
+        })
+    }
 
     return (<GlobalContext.Provider value={{
         owner: state.owner,
         token: state.token,
-        saveToken
+        saveToken,
+        logout
     }}>
         {children}
     </GlobalContext.Provider>);

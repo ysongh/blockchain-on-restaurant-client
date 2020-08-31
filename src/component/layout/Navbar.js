@@ -5,12 +5,15 @@ import Logo from '../../assets/logo.png';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = () => {
-    const { token } = useContext(GlobalContext);
+    const { token, logout } = useContext(GlobalContext);
 
     const UserLinks = (
         <>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
+            </li>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link" to="/" onClick={() => logout()}>Logout</Link>
             </li>
         </>
     );
