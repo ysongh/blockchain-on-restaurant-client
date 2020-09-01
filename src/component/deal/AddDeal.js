@@ -6,6 +6,7 @@ import axios from '../../axios';
 import TextInput from '../common/TextInput';
 import TextArea from '../common/TextArea';
 import Loading from '../common/Loading';
+import DefaultImage from '../../assets/noimage.png';
 
 const AddDeal = () => {
     const history = useHistory();
@@ -117,7 +118,7 @@ const AddDeal = () => {
                                 <label className="custom-file-label" htmlFor="inputGroupFile01">{imageName}</label>
                             </div>
                         </div>
-                        {imageFile && <img src={preview} alt="Preview" /> }
+                        <img src={imageFile ? preview : DefaultImage} alt="Preview" />
                     </div>
                 </div>
                 
