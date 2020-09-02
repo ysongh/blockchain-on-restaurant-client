@@ -73,7 +73,7 @@ const RestaurantDetail = () => {
                                         <p className="card-text">{deal.description}</p>
                                         <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
                                         <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
-                                        <p class="card-text"><small class="text-muted">{deal.date}</small></p>
+                                        <p className="card-text"><small className="text-muted">{deal.date}</small></p>
                                     </div>
                                 </div>
                             </div>
