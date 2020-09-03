@@ -11,7 +11,7 @@ const RestaurantDetail = () => {
     const history = useHistory();
 
     const [data, setData] = useState({deals: []});
-    const [go] = useState(true);
+    const [go, setGo] = useState(true);
 
     useEffect(() => {
         async function getRestaurants() {
@@ -39,6 +39,8 @@ const RestaurantDetail = () => {
     const removeDeal = async (dealId) => {
         try{
             await axios.delete(`/deal/${id}/${dealId}`);
+
+            setGo(!go);
         } catch(err){
             console.error(err);
         }
