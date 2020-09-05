@@ -46,7 +46,7 @@ const Deals = () => {
                                             <Link to={`/restaurant/${restaurant.restaurant}`} className="btn primary-color">See Restaurant</Link>
                                             <p className="h5">${restaurant.price}</p>
                                         </div>
-                                        <p class="card-text"><small class="text-muted">{restaurant.date}</small></p>
+                                        <p className="card-text"><small className="text-muted">{restaurant.date}</small></p>
                                     </div>
                                 </div>
                             </div>
