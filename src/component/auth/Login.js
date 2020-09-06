@@ -23,6 +23,8 @@ const Login = () => {
             const { data } = await axios.put('/owner/login', ownerData);
             saveToken(data.token);
 
+            axios.defaults.headers.common = {'Authorization' : data.token}
+
             history.push('/');
         } catch(err){
             console.error(err);
