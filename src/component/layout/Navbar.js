@@ -13,7 +13,7 @@ const Navbar = () => {
                 <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
             </li>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <Link className="nav-link" to="/" onClick={() => logout()}>Logout</Link>
+                <Link className="nav-link btn secondary-color" to="/" onClick={() => logout()}>Logout</Link>
             </li>
         </>
     );
@@ -24,7 +24,7 @@ const Navbar = () => {
                 <Link className="nav-link" to="/login">Login</Link>
             </li>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <Link className="nav-link" to="/register">Get Started</Link>
+                <Link className="nav-link btn primary-color" to="/register">Get Started</Link>
             </li>
         </>
     )
