@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router";
 import { Link, useHistory } from 'react-router-dom';
 import Moment from 'react-moment';
@@ -6,8 +6,10 @@ import Moment from 'react-moment';
 import axios from '../../axios';
 import Modal from '../common/Modal';
 import DefaultImage from '../../assets/noimage.png';
+import { GlobalContext } from '../../context/GlobalState';
 
 const RestaurantDetail = () => {
+    const { token } = useContext(GlobalContext);
     const { id } =  useParams();
     const history = useHistory();
 
@@ -47,6 +49,14 @@ const RestaurantDetail = () => {
         }
     }
 
+    const restaurantActionButtons = (
+        <>
+            <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
+            <Link to={`/addrestaurant/${id}`} className="btn btn-info">Edit Restaurant</Link>
+            <button className="btn btn-danger" data-toggle="modal" data-target="#modal">Remove Restaurant</button>
+        </>
+    )
+
     return(
         <div className="container">
             <h1 className="text-center">{data.name}</h1>
@@ -62,9 +72,7 @@ const RestaurantDetail = () => {
                             Post On <Moment format="MM/DD/YYYY">{data.date}</Moment>
                         </small>
                     </p>
-                    <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
-                    <Link to={`/addrestaurant/${id}`} className="btn btn-info">Edit Restaurant</Link>
-                    <button className="btn btn-danger" data-toggle="modal" data-target="#modal">Remove Restaurant</button>
+                    { token && restaurantActionButtons }
                 </div>
             </div>
             <hr />
@@ -79,8 +87,13 @@ const RestaurantDetail = () => {
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.price}</p>
                                         <p className="card-text">{deal.description}</p>
-                                        <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
-                                        <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
+                                        { token && (
+                                            <>
+                                                <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
+                                                <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
+                                            </>
+                                        )}
+                                        
                                         <p className="card-text">
                                             <small className="text-muted">
                                                 Post On <Moment format="MM/DD/YYYY">{deal.date}</Moment>
