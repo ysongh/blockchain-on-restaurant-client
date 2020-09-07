@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Moment from 'react-moment';
 
 import axios from '../../axios';
 import Alert from '../common/Alert';
@@ -46,7 +47,11 @@ const Deals = () => {
                                             <Link to={`/restaurant/${restaurant.restaurant}`} className="btn primary-color">See Restaurant</Link>
                                             <p className="h5">${restaurant.price}</p>
                                         </div>
-                                        <p className="card-text"><small className="text-muted">{restaurant.date}</small></p>
+                                        <p className="card-text">
+                                            <small className="text-muted">
+                                                Post On <Moment format="MM/DD/YYYY">{restaurant.date}</Moment>
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>

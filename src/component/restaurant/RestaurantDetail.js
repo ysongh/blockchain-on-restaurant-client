@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router";
 import { Link, useHistory } from 'react-router-dom';
+import Moment from 'react-moment';
 
 import axios from '../../axios';
 import Modal from '../common/Modal';
@@ -56,6 +57,11 @@ const RestaurantDetail = () => {
                 <div className="col-12 col-md-6">
                     <p>{data.location}</p>
                     <p>{data.description}</p>
+                    <p className="card-text">
+                        <small className="text-muted">
+                            Post On <Moment format="MM/DD/YYYY">{data.date}</Moment>
+                        </small>
+                    </p>
                     <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
                     <Link to={`/addrestaurant/${id}`} className="btn btn-info">Edit Restaurant</Link>
                     <button className="btn btn-danger" data-toggle="modal" data-target="#modal">Remove Restaurant</button>
@@ -75,7 +81,11 @@ const RestaurantDetail = () => {
                                         <p className="card-text">{deal.description}</p>
                                         <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
                                         <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
-                                        <p className="card-text"><small className="text-muted">{deal.date}</small></p>
+                                        <p className="card-text">
+                                            <small className="text-muted">
+                                                Post On <Moment format="MM/DD/YYYY">{deal.date}</Moment>
+                                            </small>
+                                        </p>
                                     </div>
                                 </div>
                             </div>
