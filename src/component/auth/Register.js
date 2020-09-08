@@ -2,6 +2,7 @@ import React, { useState }from 'react';
 import { Link } from 'react-router-dom';
 
 import axios from '../../axios';
+import Alert from '../common/Alert';
 import Background1 from '../../assets/background1.png';
 import TextInput from '../common/TextInput';
 
@@ -9,6 +10,7 @@ const Register = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
 
     const registerOwner = async () => {
         try{
@@ -21,12 +23,14 @@ const Register = () => {
             const res = await axios.post('/owner/register', ownerData);
             console.log(res)
         } catch(err){
+            setError("Invalid, try again");
             console.error(err);
         }
     }
     
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <div className="row">
                 <div className="col-12 col-md-5">
                     <img src={Background1} alt="Restaurant" />

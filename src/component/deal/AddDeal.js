@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
+import Alert from '../common/Alert';
 import TextInput from '../common/TextInput';
 import TextArea from '../common/TextArea';
 import Loading from '../common/Loading';
@@ -20,7 +21,8 @@ const AddDeal = () => {
     const [loading, setLoading] = useState(false);
     const [preview, setPreview] = useState();
     const [go] = useState(true);
-    
+    const [error, setError] = useState("");
+
     useEffect(() => {
         async function getDealInfo() {
             try{
@@ -78,6 +80,7 @@ const AddDeal = () => {
             history.push(`/restaurant/${id}`);
 
         } catch(err){
+            setError("Invalid, try again");
             setLoading(false);
             console.error(err);
         }
@@ -85,6 +88,7 @@ const AddDeal = () => {
 
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <h1 className="mt-2">{dealid ? "Edit" : "Add"} Deal</h1>
 
             <div className="form-group">

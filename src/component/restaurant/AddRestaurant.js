@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import { useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
+import Alert from '../common/Alert';
 import TextInput from '../common/TextInput';
 import TextArea from '../common/TextArea';
 import Loading from '../common/Loading';
@@ -20,6 +21,7 @@ const AddRestaurant = () => {
     const [loading, setLoading] = useState(false);
     const [go] = useState(true);
     const [preview, setPreview] = useState();
+    const [error, setError] = useState("");
 
     useEffect(() => {
         async function getRestaurantInfo() {
@@ -78,6 +80,7 @@ const AddRestaurant = () => {
             }
 
         } catch(err){
+            setError("Invalid, try again");
             setLoading(false);
             console.error(err);
         }
@@ -85,6 +88,7 @@ const AddRestaurant = () => {
 
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <h1 className="mt-2">{id ? "Edit" : "Add"} Restaurant</h1>
 
             <div className="form-group">

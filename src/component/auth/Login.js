@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
 import { GlobalContext } from '../../context/GlobalState';
+import Alert from '../common/Alert';
 import Background2 from '../../assets/background2.png';
 import TextInput from '../common/TextInput';
 
@@ -12,6 +13,7 @@ const Login = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState("");
 
     const loginOwner = async () => {
         try{
@@ -27,12 +29,14 @@ const Login = () => {
 
             history.push('/');
         } catch(err){
+            setError("Invalid, try again");
             console.error(err);
         }
     }
     
     return(
         <div className="container">
+            { error && <Alert msg={error} /> }
             <div className="row">
                 <div className="col-12 col-md-5">
                     <img src={Background2} alt="Restaurant" />
