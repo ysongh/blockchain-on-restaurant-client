@@ -59,12 +59,12 @@ const RestaurantDetail = () => {
 
     return(
         <div className="container">
-            <h1 className="text-center">{data.name}</h1>
-            <div className="row">
+            <div className="row mt-4">
                 <div className="col-12 col-md-6">
                     <img style={{height: '400px'}} src={data.image || DefaultImage} alt="Restaurant" />
                 </div>
                 <div className="col-12 col-md-6">
+                    <h1>{data.name}</h1>
                     <p>{data.location}</p>
                     <p>{data.description}</p>
                     <p className="card-text">
