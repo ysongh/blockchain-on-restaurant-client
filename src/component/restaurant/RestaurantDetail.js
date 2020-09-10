@@ -82,7 +82,7 @@ const RestaurantDetail = () => {
                         return(
                             <div className="col-12 col-md-6 col-lg-4" key={deal._id}>
                                 <div className="card mb-3">
-                                    <img className="card-img-top" src={deal.image || DefaultImage} alt="Deal" />
+                                    <img className="card-img-top card-img-height" src={deal.image || DefaultImage} alt="Deal" />
                                     <div className="card-body">
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.price}</p>

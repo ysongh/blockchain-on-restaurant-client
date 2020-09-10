@@ -38,7 +38,7 @@ const Deals = () => {
                             <div className="col-12 col-md-6 col-lg-4" key={restaurant._id}>
                                 <div className="card mb-3">
                                     <Link to={`/restaurant/${restaurant.restaurant}`}>
-                                        <img className="card-img-top" src={restaurant.image || DefaultImage} alt="Restaurant" />
+                                        <img className="card-img-height card-img-top" src={restaurant.image || DefaultImage} alt="Restaurant" />
                                     </Link>
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>
