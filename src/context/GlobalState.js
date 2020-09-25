@@ -12,6 +12,7 @@ export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, inititalState);
 
     function saveToken(token){
+        localStorage.setItem('jwtToken', token);
         dispatch({
             type: "SAVE_TOKEN",
             payload: token

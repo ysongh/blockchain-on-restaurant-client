@@ -1,11 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Logo from '../../assets/logo.png';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = () => {
-    const { token, logout } = useContext(GlobalContext);
+    const { token, saveToken, logout } = useContext(GlobalContext);
+
+    const [go] = useState(true);
+
+    useEffect(() => {
+        function findToken() {
+            if(localStorage.jwtToken){
+                saveToken(localStorage.jwtToken);
+            }
+        }
+        
+        findToken();
+
+    }, [go]);
 
     const UserLinks = (
         <>
