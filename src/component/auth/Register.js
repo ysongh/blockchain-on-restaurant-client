@@ -33,7 +33,7 @@ const Register = () => {
             { error && <Alert msg={error} /> }
             <div className="row">
                 <div className="col-12 col-md-5">
-                    <img src={Background1} alt="Restaurant" />
+                    <img className="d-none d-md-block" src={Background1} alt="Restaurant" />
                 </div>
                 <div className="col-12 col-md-7">
                     <div className="container mt-5">
