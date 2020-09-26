@@ -19,6 +19,7 @@ export const GlobalProvider = ({ children }) => {
         })
     }
     function logout(){
+        localStorage.removeItem('jwtToken');
         dispatch({
             type: "LOGOUT"
         })

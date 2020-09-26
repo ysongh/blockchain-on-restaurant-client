@@ -18,7 +18,7 @@ const Navbar = () => {
         
         findToken();
 
-    }, [go]);
+    }, [go, saveToken]);
 
     const UserLinks = (
         <>
