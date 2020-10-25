@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import Logo from '../../assets/logo.png';
 import { GlobalContext } from '../../context/GlobalState';
@@ -12,6 +13,13 @@ const Navbar = () => {
     useEffect(() => {
         if(localStorage.jwtToken){
             saveToken(localStorage.jwtToken);
+            const decoded = jwt_decode(localStorage.jwtToken);
+            
+            const currentTime = Date.now() / 1000;
+            
+            if(decoded.exp < currentTime){
+                logout();
+            }
         }
     }, [go]);
 
