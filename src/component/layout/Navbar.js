@@ -10,15 +10,10 @@ const Navbar = () => {
     const [go] = useState(true);
 
     useEffect(() => {
-        function findToken() {
-            if(localStorage.jwtToken){
-                saveToken(localStorage.jwtToken);
-            }
+        if(localStorage.jwtToken){
+            saveToken(localStorage.jwtToken);
         }
-        
-        findToken();
-
-    }, [go, saveToken]);
+    }, [go]);
 
     const UserLinks = (
         <>
@@ -40,7 +35,7 @@ const Navbar = () => {
                 <Link className="nav-link btn primary-color" to="/register">Get Started</Link>
             </li>
         </>
-    )
+    );
 
     return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
