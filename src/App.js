@@ -14,7 +14,7 @@ import AddRestaurant from './component/restaurant/AddRestaurant';
 import Deals from './component/deal/Deals';
 import AddDeal from './component/deal/AddDeal';
 import PrivateRoute from './component/common/PrivateRoute';
-// import Coin from './component/Coin';
+import Coin from './component/Coin';
 
 function App() {
   return (
@@ -32,7 +32,7 @@ function App() {
           <Route exact path="/restaurant/:id" component={RestaurantDetail} />
           <PrivateRoute exact path="/restaurant/:id/adddeal/:dealid" component={AddDeal} />
           <PrivateRoute exact path="/restaurant/:id/adddeal" component={AddDeal} />
-          {/* <Route exact path="/coin" component={Coin} /> */}
+          <Route exact path="/coin" component={Coin} />
         </main>
         <Footer />
       </Router>

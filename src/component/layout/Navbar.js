@@ -65,11 +65,10 @@ const Navbar = () => {
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/restaurant">Restaurant</Link>
                         </li>
-                        { token ? UserLinks : GuestLinks }
-                        
-                        {/* <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Coin</Link>
-                        </li> */}
+                        </li>
+                        { token ? UserLinks : GuestLinks }
                     </ul>
                 </div>
             </div>
