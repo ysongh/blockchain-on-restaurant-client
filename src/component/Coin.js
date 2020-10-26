@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
 
-import {EATOUTTOKEN_ABI, EATOUTTOKEN_ADDRESS} from '../config';
+import EatOutToken from '../abis/EatOutToken.json';
 import TextInput from './common/TextInput';
 import Spinner from './common/Spinner';
 
@@ -36,17 +36,24 @@ class Coin extends Component{
   }
 
   async loadBlockchainData(){
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:7545");
+    const web3 = window.web3;
 
     const accounts = await web3.eth.getAccounts();
     this.setState({ account: accounts[0]});
 
-    const eatOutToken = new web3.eth.Contract(EATOUTTOKEN_ABI, EATOUTTOKEN_ADDRESS);
-    this.setState({ eatOutToken });
+    const networkId = await web3.eth.net.getId();
+    const networkData = EatOutToken.networks[networkId];
 
-    const balance = await eatOutToken.methods.balanceOf(accounts[0]).call();
+    if(networkData){
+      const eatOutToken = web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
+      this.setState({ eatOutToken });
 
-    this.setState({ balance });
+      const balance = await eatOutToken.methods.balanceOf(accounts[0]).call();
+      this.setState({ balance });
+    }
+    else{
+      window.alert('Contract is not deployed to detected network')
+    }
   }
 
   onSubmit(){
