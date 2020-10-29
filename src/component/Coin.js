@@ -45,7 +45,7 @@ class Coin extends Component{
     const networkData = EatOutToken.networks[networkId];
 
     if(networkData){
-      const eatOutToken = web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
+      const eatOutToken = new web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
       this.setState({ eatOutToken });
 
       const balance = await eatOutToken.methods.balanceOf(accounts[0]).call();
