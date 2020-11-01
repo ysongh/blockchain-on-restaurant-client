@@ -16,6 +16,8 @@ const AddRestaurant = () => {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [email, setEmail] = useState('');
     const [imageFile, setImageFile] = useState('');
     const [imageName, setImageName] = useState('Choose File');
     const [loading, setLoading] = useState(false);
@@ -68,6 +70,8 @@ const AddRestaurant = () => {
             const formData = new FormData();
             formData.append('name', name);
             formData.append('location', location);
+            formData.append('phoneNumber', phoneNumber);
+            formData.append('email', email);
             formData.append('description', description);
             formData.append('image', imageFile);
 
@@ -104,6 +108,16 @@ const AddRestaurant = () => {
                             type="text"
                             value={location}
                             onChange={e => setLocation(e.target.value)} />
+                        <TextInput
+                            label="Phone Number"
+                            type="text"
+                            value={phoneNumber}
+                            onChange={e => setPhoneNumber(e.target.value)} />
+                        <TextInput
+                            label="Email"
+                            type="text"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)} />
                         <TextArea
                             label="Description"
                             type="text"

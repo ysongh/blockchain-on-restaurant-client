@@ -20,7 +20,7 @@ const RestaurantDetail = () => {
         async function getRestaurants() {
             try{
                 const { data } = await axios.get('/restaurant/' + id);
-    
+                
                 setData(data.data);
             } catch(err){
                 console.error(err);
@@ -66,6 +66,8 @@ const RestaurantDetail = () => {
                 <div className="col-12 col-md-6">
                     <h1>{data.name}</h1>
                     <p>{data.location}</p>
+                    <p>{data.phoneNumber}</p>
+                    <p>{data.email}</p>
                     <p>{data.description}</p>
                     <p className="card-text">
                         <small className="text-muted">
