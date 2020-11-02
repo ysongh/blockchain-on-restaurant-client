@@ -1,12 +1,16 @@
-import React, { useState }from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext }from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import axios from '../../axios';
+import { GlobalContext } from '../../context/GlobalState';
 import Alert from '../common/Alert';
 import Background1 from '../../assets/background1.png';
 import TextInput from '../common/TextInput';
 
 const Register = () => {
+    const history = useHistory();
+    const { saveToken } = useContext(GlobalContext);
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -20,8 +24,11 @@ const Register = () => {
                 password
             }
 
-            const res = await axios.post('/owner/register', ownerData);
-            console.log(res)
+            const { data } = await axios.post('/owner/register', ownerData);
+            saveToken(data.token);
+
+            axios.defaults.headers.common = {'Authorization' : data.token}
+            history.push('/');
         } catch(err){
             setError("Invalid, try again");
             console.error(err);
