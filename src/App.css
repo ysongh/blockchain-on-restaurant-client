@@ -16,6 +16,10 @@ img{
     margin: auto;
 }
 
+.action-icon{
+    width: 50px;
+}
+
 .card-img-height{ height: 280px; }
 
 .primary-color{ background-color: #FFD460 !important; }

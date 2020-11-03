@@ -6,6 +6,8 @@ import Moment from 'react-moment';
 import axios from '../../axios';
 import Modal from '../common/Modal';
 import DefaultImage from '../../assets/noimage.png';
+import EditIcon from '../../assets/edit-icon.svg';
+import DeleteIcon from '../../assets/delete-icon.svg';
 import { GlobalContext } from '../../context/GlobalState';
 
 const RestaurantDetail = () => {
@@ -91,8 +93,10 @@ const RestaurantDetail = () => {
                                         <p className="card-text">{deal.description}</p>
                                         { token && (
                                             <>
-                                                <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info">Edit Deal</Link>
-                                                <button className="btn btn-danger" onClick={() => removeDeal(deal._id)}>Remove Deal</button>
+                                                <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-light action-icon">
+                                                    <img src={EditIcon} alt="Edit" />
+                                                </Link>
+                                                <img src={DeleteIcon} alt="Delete" className="btn btn-light action-icon" onClick={() => removeDeal(deal._id)} />
                                             </>
                                         )}
                                         
