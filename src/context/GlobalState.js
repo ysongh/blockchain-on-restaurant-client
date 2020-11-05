@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import AppReducer from './AppReducer';
 
 const inititalState = {
-    owner: {},
+    ownerId: '',
     token: ''
 }
 
@@ -11,11 +11,14 @@ export const GlobalContext = createContext(inititalState);
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, inititalState);
 
-    function saveToken(token){
+    function saveToken(token, id){
         localStorage.setItem('jwtToken', token);
+
+        const data = {token, id};
+
         dispatch({
             type: "SAVE_TOKEN",
-            payload: token
+            payload: data
         })
     }
     function logout(){
@@ -26,7 +29,7 @@ export const GlobalProvider = ({ children }) => {
     }
 
     return (<GlobalContext.Provider value={{
-        owner: state.owner,
+        ownerId: state.ownerId,
         token: state.token,
         saveToken,
         logout

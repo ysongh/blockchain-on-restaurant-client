@@ -12,8 +12,8 @@ const Navbar = () => {
 
     useEffect(() => {
         if(localStorage.jwtToken){
-            saveToken(localStorage.jwtToken);
             const decoded = jwt_decode(localStorage.jwtToken);
+            saveToken(localStorage.jwtToken, decoded.id);
             
             const currentTime = Date.now() / 1000;
             

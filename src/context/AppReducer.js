@@ -3,12 +3,14 @@ export default (state, action) => {
         case "SAVE_TOKEN":
             return{
                 ...state,
-                token: action.payload
+                token: action.payload.token,
+                ownerId: action.payload.id
             }
         case "LOGOUT":
             return{
                 ...state,
-                token: ''
+                token: '',
+                ownerId: ''
             }
         default:
             return state;
