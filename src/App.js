@@ -13,6 +13,7 @@ import RestaurantDetail from './component/restaurant/RestaurantDetail';
 import AddRestaurant from './component/restaurant/AddRestaurant';
 import Deals from './component/deal/Deals';
 import AddDeal from './component/deal/AddDeal';
+import Profile from './component/Profile';
 import PrivateRoute from './component/common/PrivateRoute';
 import Coin from './component/Coin';
 
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/restaurant/:id" component={RestaurantDetail} />
           <PrivateRoute exact path="/restaurant/:id/adddeal/:dealid" component={AddDeal} />
           <PrivateRoute exact path="/restaurant/:id/adddeal" component={AddDeal} />
+          <PrivateRoute exact path="/profile" component={Profile} />
           <Route exact path="/coin" component={Coin} />
         </main>
         <Footer />

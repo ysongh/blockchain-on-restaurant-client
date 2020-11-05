@@ -68,6 +68,9 @@ const Navbar = () => {
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Coin</Link>
                         </li>
+                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                            <Link className="nav-link" to="/profile">Profile</Link>
+                        </li>
                         { token ? UserLinks : GuestLinks }
                     </ul>
                 </div>
