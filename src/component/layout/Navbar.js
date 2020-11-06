@@ -6,7 +6,7 @@ import Logo from '../../assets/logo.png';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = () => {
-    const { token, saveToken, logout } = useContext(GlobalContext);
+    const { ownerId, token, saveToken, logout } = useContext(GlobalContext);
 
     const [go] = useState(true);
 
