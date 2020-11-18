@@ -20,6 +20,13 @@ img{
     width: 50px;
 }
 
+.badge-price{
+    font-size: 1.2rem;
+    position: absolute;
+    right: 0;
+    padding: 10px;
+}
+
 .card-img-height{ height: 280px; }
 
 .primary-color{ background-color: #FFD460 !important; }

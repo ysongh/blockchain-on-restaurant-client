@@ -39,13 +39,14 @@ const Deals = () => {
                                 <div className="card mb-3">
                                     <Link to={`/restaurant/${restaurant.restaurant}`}>
                                         <img className="card-img-height card-img-top" src={restaurant.image || DefaultImage} alt="Restaurant" />
+                                        <span className="badge  badge-pill badge-info badge-price">${restaurant.price}</span>
                                     </Link>
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>
                                         <p className="card-text">{restaurant.location}</p>
                                         <div className="d-flex justify-content-between">
                                             <Link to={`/restaurant/${restaurant.restaurant}`} className="btn primary-color">See Restaurant</Link>
-                                            <p className="h5">${restaurant.price}</p>
+                                            
                                         </div>
                                         <p className="card-text">
                                             <small className="text-muted">
