@@ -1,5 +1,6 @@
 import React, { useState, useContext }from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import jwt_decode from 'jwt-decode';
 
 import axios from '../../axios';
 import { GlobalContext } from '../../context/GlobalState';
@@ -23,7 +24,8 @@ const Login = () => {
             }
 
             const { data } = await axios.put('/owner/login', ownerData);
-            saveToken(data.token);
+            const decoded = jwt_decode(data.token);
+            saveToken(data.token, decoded.id);
 
             axios.defaults.headers.common = {'Authorization' : data.token}
 
