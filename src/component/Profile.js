@@ -16,6 +16,7 @@ const Profile = () => {
             try{
                 const { data } = await axios.get('/owner/profile/' + ownerId);
                 
+                console.log(data.data)
                 setData(data.data);
             } catch(err){
                 console.error(err);
@@ -27,7 +28,13 @@ const Profile = () => {
 
     return(
         <div className="container">
-            <h1>{data.name}</h1>
+            <div className="d-flex justify-content-between align-items-center my-2">
+                <h1>Welcome back, {data.name}</h1>
+                <Link to="/addrestaurant" className="btn btn-info">
+                    Add Restaurant
+                </Link>
+            </div>
+            
             <div className="row">
                 {
                     data.restaurants.map(restaurant => {
