@@ -97,19 +97,35 @@ const Profile = () => {
                             </div>
                         </div>
                         <div className="col-12 col-md-6 col-lg-8">
-                            { restaurant.deals && restaurant.deals.map(deal => {
-                                return(
-                                    <div key={deal._id}>
-                                        <h2>{deal.name}</h2>
-                                        <p>{deal.price}</p>
-                                        <p>{deal.description}</p>
-                                        <Link to={`/restaurant/${restaurant._id}/adddeal/${deal._id}`} className="btn btn-info action-icon mr-1">
-                                            <img src={EditIcon} alt="Edit" />
-                                        </Link>
-                                        <img src={DeleteIcon} alt="Delete" className="btn btn-danger action-icon" onClick={() => removeDeal(restaurant._id,deal._id)} />
-                                    </div>
-                                )
-                            })}
+                            <div className="table-responsive">
+                                <table className="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    { restaurant.deals && restaurant.deals.map(deal => {
+                                        return(
+                                            <tr key={deal._id}>
+                                                <td>{ deal.name }</td>
+                                                <td>${ deal.price }</td>
+                                                <td>{ deal.description }</td>
+                                                <td>
+                                                    <Link to={`/restaurant/${restaurant._id}/adddeal/${deal._id}`} className="btn btn-info action-icon mr-1">
+                                                        <img src={EditIcon} alt="Edit" />
+                                                    </Link>
+                                                    <img src={DeleteIcon} alt="Delete" className="btn btn-danger action-icon" onClick={() => removeDeal(restaurant._id,deal._id)} />
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                                </table>
+                            </div>
                         </div>
                         <Modal onClick={() => removeRestaurant(restaurant._id)} />
                     </div>
