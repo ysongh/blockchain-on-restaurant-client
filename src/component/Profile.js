@@ -5,11 +5,15 @@ import Moment from 'react-moment';
 
 import { GlobalContext } from '../context/GlobalState';
 import DefaultImage from '../assets/noimage.png';
+import EditIcon from '../assets/edit-icon.svg';
+import DeleteIcon from '../assets/delete-icon.svg';
+import Modal from './common/Modal';
 
 const Profile = () => {
     const { ownerId } = useContext(GlobalContext);
 
     const [data, setData] = useState({restaurants: []});
+    const [go, setGo] = useState(true);
 
     useEffect(() => {
         async function getProfile() {
@@ -35,6 +39,24 @@ const Profile = () => {
         getProfile();
     }, []);
 
+    const removeRestaurant = async restaurantId => {
+        try{
+            await axios.delete('/restaurant/' + restaurantId);
+        } catch(err){
+            console.error(err);
+        }
+    }
+
+    const removeDeal = async (restaurantId, dealId) => {
+        try{
+            await axios.delete(`/deal/${restaurantId}/${dealId}`);
+
+            setGo(!go);
+        } catch(err){
+            console.error(err);
+        }
+    }
+
     return(
         <div className="container">
             <div className="d-flex justify-content-between align-items-center my-2">
@@ -56,6 +78,16 @@ const Profile = () => {
                                     <h5 className="card-title">{restaurant.name}</h5>
                                     <p className="card-text">{restaurant.location}</p>
                                     <Link to={`/restaurant/${restaurant._id}`} className="btn primary-color">See Deals</Link>
+                                    <Link to={`/restaurant/${restaurant._id}/adddeal`} className="btn primary-color">Add Deal</Link>
+                                    <Link to={`/addrestaurant/${restaurant._id}`} className="btn btn-info action-icon mr-1">
+                                        <img src={EditIcon} alt="Edit" />
+                                    </Link>
+                                    <img
+                                        src={DeleteIcon}
+                                        alt="Delete"
+                                        className="btn btn-danger action-icon"
+                                        data-toggle="modal"
+                                        data-target="#modal" />
                                     <p className="card-text">
                                         <small className="text-muted">
                                             Post On <Moment format="MM/DD/YYYY">{restaurant.date}</Moment>
@@ -71,10 +103,15 @@ const Profile = () => {
                                         <h2>{deal.name}</h2>
                                         <p>{deal.price}</p>
                                         <p>{deal.description}</p>
+                                        <Link to={`/restaurant/${restaurant._id}/adddeal/${deal._id}`} className="btn btn-info action-icon mr-1">
+                                            <img src={EditIcon} alt="Edit" />
+                                        </Link>
+                                        <img src={DeleteIcon} alt="Delete" className="btn btn-danger action-icon" onClick={() => removeDeal(restaurant._id,deal._id)} />
                                     </div>
                                 )
                             })}
                         </div>
+                        <Modal onClick={() => removeRestaurant(restaurant._id)} />
                     </div>
                 )
             })}

@@ -1,22 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router";
-import { Link, useHistory } from 'react-router-dom';
 import Moment from 'react-moment';
 
 import axios from '../../axios';
-import Modal from '../common/Modal';
 import DefaultImage from '../../assets/noimage.png';
-import EditIcon from '../../assets/edit-icon.svg';
-import DeleteIcon from '../../assets/delete-icon.svg';
-import { GlobalContext } from '../../context/GlobalState';
 
 const RestaurantDetail = () => {
-    const { token } = useContext(GlobalContext);
     const { id } =  useParams();
-    const history = useHistory();
 
     const [data, setData] = useState({deals: []});
-    const [go, setGo] = useState(true);
+    const [go] = useState(true);
 
     useEffect(() => {
         async function getRestaurants() {
@@ -32,40 +25,6 @@ const RestaurantDetail = () => {
         getRestaurants();
     }, [go, id]);
 
-    const removeRestaurant = async () => {
-        try{
-            await axios.delete('/restaurant/' + id);
-            history.push('/restaurant');
-        } catch(err){
-            console.error(err);
-        }
-    }
-
-    const removeDeal = async (dealId) => {
-        try{
-            await axios.delete(`/deal/${id}/${dealId}`);
-
-            setGo(!go);
-        } catch(err){
-            console.error(err);
-        }
-    }
-
-    const restaurantActionButtons = (
-        <>
-            
-            <Link to={`/addrestaurant/${id}`} className="btn btn-info action-icon mr-1">
-                <img src={EditIcon} alt="Edit" />
-            </Link>
-            <img
-                src={DeleteIcon}
-                alt="Delete"
-                className="btn btn-danger action-icon"
-                data-toggle="modal"
-                data-target="#modal" />
-        </>
-    )
-
     return(
         <div className="container">
             <div className="row mt-4">
@@ -75,7 +34,6 @@ const RestaurantDetail = () => {
                 <div className="col-12 col-md-6">
                     <div className="d-flex align-items-center">
                         <h1 className="mr-2">{data.name}</h1>
-                        { token && restaurantActionButtons }
                     </div>
                     <p>{data.location}</p>
                     <p>{data.phoneNumber}</p>
@@ -86,7 +44,6 @@ const RestaurantDetail = () => {
                             Post On <Moment format="MM/DD/YYYY">{data.date}</Moment>
                         </small>
                     </p>
-                    <Link to={`/restaurant/${id}/adddeal`} className="btn primary-color">Add Deal</Link>
                 </div>
             </div>
             <hr />
@@ -101,15 +58,6 @@ const RestaurantDetail = () => {
                                     <div className="card-body">
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.description}</p>
-                                        { token && (
-                                            <>
-                                                <Link to={`/restaurant/${id}/adddeal/${deal._id}`} className="btn btn-info action-icon mr-1">
-                                                    <img src={EditIcon} alt="Edit" />
-                                                </Link>
-                                                <img src={DeleteIcon} alt="Delete" className="btn btn-danger action-icon" onClick={() => removeDeal(deal._id)} />
-                                            </>
-                                        )}
-                                        
                                         <p className="card-text">
                                             <small className="text-muted">
                                                 Post On <Moment format="MM/DD/YYYY">{deal.date}</Moment>
@@ -122,7 +70,6 @@ const RestaurantDetail = () => {
                     })
                 ) : <p className="mt-5 h4 text-danger">No Deals</p>}
             </div>
-            <Modal onClick={() => removeRestaurant()} />
         </div>
     );
 };
