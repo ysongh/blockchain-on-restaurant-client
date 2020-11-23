@@ -24,9 +24,14 @@ const Navbar = () => {
     }, [go]);
 
     const UserLinks = (
-        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-            <Link className="nav-link btn secondary-color" to="/" onClick={() => logout()}>Logout</Link>
-        </li>
+        <>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link" to="/profile">Profile</Link>
+            </li>
+            <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                <Link className="nav-link btn secondary-color" to="/" onClick={() => logout()}>Logout</Link>
+            </li>
+        </>
     );
 
     const GuestLinks = (
@@ -62,9 +67,6 @@ const Navbar = () => {
                         </li>
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Coin</Link>
-                        </li>
-                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                            <Link className="nav-link" to="/profile">Profile</Link>
                         </li>
                         { token ? UserLinks : GuestLinks }
                     </ul>
