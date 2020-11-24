@@ -60,8 +60,8 @@ const Profile = () => {
     return(
         <div className="container">
             <div className="d-flex justify-content-between align-items-center my-2">
-                <h1>Welcome back, {data.name}</h1>
-                <Link to="/addrestaurant" className="btn btn-info">
+                <h1 className="h3">Welcome back, {data.name}</h1>
+                <Link to="/addrestaurant" className="btn primary-color">
                     Add Restaurant
                 </Link>
             </div>
@@ -76,18 +76,17 @@ const Profile = () => {
                                 </Link>
                                 <div className="card-body">
                                     <h5 className="card-title">{restaurant.name}</h5>
-                                    <p className="card-text">{restaurant.location}</p>
-                                    <Link to={`/restaurant/${restaurant._id}`} className="btn primary-color">See Deals</Link>
-                                    <Link to={`/restaurant/${restaurant._id}/adddeal`} className="btn primary-color">Add Deal</Link>
-                                    <Link to={`/addrestaurant/${restaurant._id}`} className="btn btn-info action-icon mr-1">
-                                        <img src={EditIcon} alt="Edit" />
+                                    <Link to={`/restaurant/${restaurant._id}`} className="btn primary-color btn-block">See Details</Link>
+                                    <Link to={`/restaurant/${restaurant._id}/adddeal`} className="btn primary-color btn-block">Add Deal</Link>
+                                    <Link to={`/addrestaurant/${restaurant._id}`} className="btn primary-color btn-block">
+                                        Edit Restaurant
                                     </Link>
-                                    <img
-                                        src={DeleteIcon}
-                                        alt="Delete"
-                                        className="btn btn-danger action-icon"
+                                    <button
+                                        className="btn btn-danger btn-block"
                                         data-toggle="modal"
-                                        data-target="#modal" />
+                                        data-target="#modal">
+                                            Remove Restaurant
+                                    </button>
                                     <p className="card-text">
                                         <small className="text-muted">
                                             Post On <Moment format="MM/DD/YYYY">{restaurant.date}</Moment>
