@@ -49,7 +49,7 @@ class Coin extends Component{
       this.setState({ eatOutToken });
 
       const balance = await eatOutToken.methods.balanceOf(accounts[0]).call();
-      this.setState({ balance });
+      this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether') });
     }
     else{
       window.alert('Contract is not deployed to detected network')
@@ -59,7 +59,7 @@ class Coin extends Component{
   onSubmit(){
     try{
       this.setState({ loading : true });
-      this.state.eatOutToken.methods.transfer(this.state.address, this.state.amount).send({ from: this.state.account })
+      this.state.eatOutToken.methods.transfer(this.state.address, window.web3.utils.toWei(this.state.amount, 'Ether')).send({ from: this.state.account })
         .once('receipt', (receipt) => {
           console.log(receipt);
           this.setState({
