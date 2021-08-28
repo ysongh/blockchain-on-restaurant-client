@@ -1,17 +1,11 @@
-pragma solidity >=0.4.21 <0.7.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC20/ERC20Mintable.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract EatOutToken is ERC20Mintable{
-    string  public name;
-    string  public symbol;
-    uint256 public decimals;
-    address payable admin;
-
-    constructor() public {
-        name = "Eat Out Coin";
-        symbol = "EOTC";
-        decimals = 18;
-        admin = msg.sender;
+contract EatOutToken is ERC20{
+    constructor() ERC20("Eat Out Coin", "EOTC") {
+        // 5,000,000 EatOutTokens
+        _mint(msg.sender, 5000000000000000000000000);
     }
 }
