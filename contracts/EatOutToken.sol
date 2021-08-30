@@ -12,6 +12,9 @@ contract EatOutToken is ERC20{
         cToken = CEth(_cToken);
     }
 
+    // for redeem() to work
+    receive() external payable {}
+
     function supply() external payable {
         cToken.mint{value: msg.value}();
     }
