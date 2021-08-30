@@ -2,10 +2,25 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "./interface/compound.sol";
 
 contract EatOutToken is ERC20{
-    constructor() ERC20("Eat Out Coin", "EOTC") {
-        // 5,000,000 EatOutTokens
-        _mint(msg.sender, 5000000000000000000000000);
+    CEth public cToken;
+
+    constructor(address _cToken) ERC20("Eat Out Coin", "EOTC") {
+        cToken = CEth(_cToken);
+    }
+
+    function supply() external payable {
+        cToken.mint{value: msg.value}();
+    }
+
+    function getCTokenBalance() external view returns (uint) {
+        return cToken.balanceOf(address(this));
+    }
+
+    function redeem(uint _cTokenAmount) external {
+        require(cToken.redeem(_cTokenAmount) == 0, "redeem failed");
     }
 }
