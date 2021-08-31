@@ -1,12 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Web3 from 'web3';
 
 import Logo from '../../assets/logo.png';
 import EatOutToken from '../../abis/EatOutToken.json';
+import { GlobalContext } from '../../context/GlobalState';
 
 const NavbarV2 = () => {
-    const [account, setAccount] = useState('');
+    const { account, setAccount, setContract } = useContext(GlobalContext);
 
     async function connectWallet(){
         await loadWeb3();
@@ -38,7 +39,7 @@ const NavbarV2 = () => {
     
         if(networkData){
             const eatOutToken = new web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
-            console.log(eatOutToken);
+            setContract(eatOutToken);
         }
         else{
             window.alert('Contract is not deployed to detected network')

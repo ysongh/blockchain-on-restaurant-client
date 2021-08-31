@@ -3,7 +3,9 @@ import AppReducer from './AppReducer';
 
 const inititalState = {
     ownerId: '',
-    token: ''
+    token: '',
+    account: '',
+    contract: null
 }
 
 export const GlobalContext = createContext(inititalState);
@@ -21,6 +23,21 @@ export const GlobalProvider = ({ children }) => {
             payload: data
         })
     }
+
+    function setAccount(account){
+        dispatch({
+            type: "SET_ACCOUNT",
+            payload: account
+        })
+    }
+
+    function setContract(contract){
+        dispatch({
+            type: "SET_CONTRACT",
+            payload: contract
+        })
+    }
+
     function logout(){
         localStorage.removeItem('jwtToken');
         dispatch({
@@ -31,7 +48,11 @@ export const GlobalProvider = ({ children }) => {
     return (<GlobalContext.Provider value={{
         ownerId: state.ownerId,
         token: state.token,
+        account: state.account,
+        contract: state.contract,
         saveToken,
+        setAccount,
+        setContract,
         logout
     }}>
         {children}

@@ -6,6 +6,16 @@ export default (state, action) => {
                 token: action.payload.token,
                 ownerId: action.payload.id
             }
+        case "SET_ACCOUNT":
+            return{
+                ...state,
+                account: action.payload
+            }
+        case "SET_CONTRACT":
+            return{
+                ...state,
+                contract: action.payload
+            }
         case "LOGOUT":
             return{
                 ...state,
