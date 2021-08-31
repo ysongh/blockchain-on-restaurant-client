@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route  } from 'react-router-dom';
 
 import './App.css';
 import { GlobalProvider } from './context/GlobalState';
-import Navbar from './component/layout/Navbar';
+// import Navbar from './component/layout/Navbar';
+import NavbarV2 from './component/layout/NavbarV2';
 import Footer from './component/layout/Footer';
 import Home from './component/Home';
 import Register from './component/auth/Register';
@@ -21,15 +22,15 @@ function App() {
   return (
     <GlobalProvider>
       <Router className="App">
-        <Navbar />
+        <NavbarV2 />
         <main className="main">
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/deal" component={Deals} />
           <Route exact path="/restaurant" component={Restaurants} />
-          <PrivateRoute exact path="/addrestaurant/:id" component={AddRestaurant} />
-          <PrivateRoute exact path="/addrestaurant/" component={AddRestaurant} />
+          <Route exact path="/addrestaurant/:id" component={AddRestaurant} />
+          <Route exact path="/addrestaurant/" component={AddRestaurant} />
           <Route exact path="/restaurant/:id" component={RestaurantDetail} />
           <PrivateRoute exact path="/restaurant/:id/adddeal/:dealid" component={AddDeal} />
           <PrivateRoute exact path="/restaurant/:id/adddeal" component={AddDeal} />
