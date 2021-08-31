@@ -1,11 +1,52 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Web3 from 'web3';
 
 import Logo from '../../assets/logo.png';
+import EatOutToken from '../../abis/EatOutToken.json';
 
 const NavbarV2 = () => {
+    const [account, setAccount] = useState('');
+
+    async function connectWallet(){
+        await loadWeb3();
+        await loadBlockchainData()
+    }
+
+    async function loadWeb3(){
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+    
+            await window.ethereum.enable();
+        }
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider);
+        }
+        else{
+            window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+    }
+
+    async function loadBlockchainData(){
+        const web3 = window.web3;
+    
+        const accounts = await web3.eth.getAccounts();
+        setAccount(accounts[0]);
+    
+        const networkId = await web3.eth.net.getId();
+        const networkData = EatOutToken.networks[networkId];
+    
+        if(networkData){
+            const eatOutToken = new web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
+            console.log(eatOutToken);
+        }
+        else{
+            window.alert('Contract is not deployed to detected network')
+        }
+    }
+
     return(
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-md navbar-light bg-light">
             <div className="container">
                 <Link className="navbar-brand" to="/">
                     <img className="logo" src={Logo} alt="Logo" data-toggle="collapse" data-target=".navbar-collapse.show" />
@@ -29,6 +70,11 @@ const NavbarV2 = () => {
                         </li>
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <Link className="nav-link" to="/coin">Add Restaurant</Link>
+                        </li>
+                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                            <button className="btn primary-color" onClick={connectWallet}>
+                                {account ? `${account.substring(0,5)}...${account.substring(37,42)}` : "Connect"}
+                            </button>
                         </li>
                     </ul>
                 </div>
