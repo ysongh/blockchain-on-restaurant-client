@@ -100,7 +100,7 @@ const AddDeal = () => {
                             value={name}
                             onChange={e => setName(e.target.value)} />
                         <TextInput
-                            label="Price"
+                            label="Price (ETH)"
                             type="number"
                             value={price}
                             onChange={e => setPrice(e.target.value)} />

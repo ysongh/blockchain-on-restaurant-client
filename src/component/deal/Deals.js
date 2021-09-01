@@ -39,7 +39,7 @@ const Deals = () => {
                                 <div className="card mb-3">
                                     <Link to={`/restaurant/${restaurant.restaurant}`}>
                                         <img className="card-img-height card-img-top" src={restaurant.image || DefaultImage} alt="Restaurant" />
-                                        <span className="badge  badge-pill badge-info badge-price">${restaurant.price}</span>
+                                        <span className="badge  badge-pill badge-info badge-price">ETH {restaurant.price}</span>
                                     </Link>
                                     <div className="card-body">
                                         <h5 className="card-title">{restaurant.name}</h5>

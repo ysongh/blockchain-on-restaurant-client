@@ -54,7 +54,7 @@ const RestaurantDetail = () => {
                             <div className="col-12 col-md-6 col-lg-4" key={deal._id}>
                                 <div className="card mb-3">
                                     <img className="card-img-top card-img-height" src={deal.image || DefaultImage} alt="Deal" />
-                                    <span className="badge  badge-pill badge-info badge-price">${deal.price}</span>
+                                    <span className="badge  badge-pill badge-info badge-price">ETH {deal.price}</span>
                                     <div className="card-body">
                                         <h5 className="card-title">{deal.name}</h5>
                                         <p className="card-text">{deal.description}</p>

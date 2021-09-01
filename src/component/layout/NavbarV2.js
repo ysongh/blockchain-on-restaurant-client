@@ -70,7 +70,7 @@ const NavbarV2 = () => {
                             <Link className="nav-link" to="/coin">Coin</Link>
                         </li>
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                            <Link className="nav-link" to="/coin">Add Restaurant</Link>
+                            <Link className="nav-link" to="/addrestaurant">Add Restaurant</Link>
                         </li>
                         <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                             <button className="btn primary-color" onClick={connectWallet}>
