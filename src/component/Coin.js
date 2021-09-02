@@ -12,6 +12,7 @@ class Coin extends Component{
       account: '',
       amount: '',
       address: '',
+      ceth: '',
       loading: false,
     }
   }
@@ -50,6 +51,9 @@ class Coin extends Component{
 
       const balance = await eatOutToken.methods.balanceOf(accounts[0]).call();
       this.setState({ balance: web3.utils.fromWei(balance.toString(), 'Ether') });
+
+      const ceth = await eatOutToken.methods.getCTokenBalance().call();
+      this.setState({ ceth: ceth });
     }
     else{
       window.alert('Contract is not deployed to detected network')
@@ -75,6 +79,21 @@ class Coin extends Component{
     }
   }
 
+  redeem(){
+    try{
+      this.setState({ loading : true });
+      this.state.eatOutToken.methods.redeem(this.state.ceth).send({ from: this.state.account })
+        .once('receipt', (receipt) => {
+          console.log(receipt);
+          
+        })
+      this.setState({ loading : true });
+    } catch(err){
+      console.log(err)
+      this.setState({ loading : false });
+    }
+  }
+
   render(){
     return (
       <div className="container">
@@ -83,6 +102,7 @@ class Coin extends Component{
           <div className="card-body">
             <p><strong>Your Address</strong>: {this.state.account}</p>
             <p><strong>Eat Out Coins</strong>: {this.state.balance}</p>
+            <p><strong>CETH</strong>: {this.state.ceth / 10 ** 8}</p>
           </div>
         </div>
         <TextInput
@@ -96,6 +116,7 @@ class Coin extends Component{
           value={this.state.amount}
           onChange={e => this.setState({ amount: e.target.value })} />
         {this.state.loading ? <Spinner /> : <button className="btn btn-lg primary-color " onClick={this.onSubmit.bind(this)}>Send Coin</button> }
+        <button className="btn btn-lg primary-color " onClick={this.redeem.bind(this)}>Redeem</button>
       </div>
     );
   }
