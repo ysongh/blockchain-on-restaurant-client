@@ -97,26 +97,43 @@ class Coin extends Component{
   render(){
     return (
       <div className="container">
-        <h1>Send Tokens</h1>
-        <div className="card mb-3">
-          <div className="card-body">
-            <p><strong>Your Address</strong>: {this.state.account}</p>
-            <p><strong>Eat Out Coins</strong>: {this.state.balance}</p>
-            <p><strong>CETH</strong>: {this.state.ceth / 10 ** 8}</p>
+        <h1>Your profile</h1>
+        <div className="row">
+          <div className="col-sm-12 col-md-6">
+            <div className="card mb-3">
+              <div className="card-body">
+                <h5 class="card-title text-center secondary-color-text h4">
+                  Send Token
+                </h5>
+                <p className="card-text"><strong>Eat Out Coins</strong>: {this.state.balance}</p>
+                <TextInput
+                  label="Address to Send"
+                  type="text"
+                  value={this.state.address}
+                  onChange={e => this.setState({ address: e.target.value })} />
+                <TextInput
+                  label="Amount"
+                  type="text"
+                  value={this.state.amount}
+                  onChange={e => this.setState({ amount: e.target.value })} />
+                {this.state.loading ? <Spinner /> : <button className="btn btn-lg primary-color " onClick={this.onSubmit.bind(this)}>Send Coin</button> }
+              </div>
+            </div>
+          </div>
+
+          <div className="col-sm-12 col-md-6">
+            <div className="card mb-3">
+              <div className="card-body">
+                <h5 class="card-title text-center secondary-color-text h4">
+                  Redeem Payout
+                </h5>
+                <p className="card-text"><strong>CETH</strong>: {this.state.ceth / 10 ** 8}</p>
+                {this.state.loading ? <Spinner /> : <button className="btn btn-lg primary-color " onClick={this.redeem.bind(this)}>Redeem</button> }
+              </div>
+            </div>
+            
           </div>
         </div>
-        <TextInput
-          label="Address to Send"
-          type="text"
-          value={this.state.address}
-          onChange={e => this.setState({ address: e.target.value })} />
-        <TextInput
-          label="Amount"
-          type="text"
-          value={this.state.amount}
-          onChange={e => this.setState({ amount: e.target.value })} />
-        {this.state.loading ? <Spinner /> : <button className="btn btn-lg primary-color " onClick={this.onSubmit.bind(this)}>Send Coin</button> }
-        <button className="btn btn-lg primary-color " onClick={this.redeem.bind(this)}>Redeem</button>
       </div>
     );
   }
