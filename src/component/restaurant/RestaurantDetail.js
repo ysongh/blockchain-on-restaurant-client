@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router";
 import Moment from 'react-moment';
+import $ from 'jquery';
 
 import axios from '../../axios';
 import DefaultImage from '../../assets/noimage.png';
+import TransactionModal from '../common/TransactionModal';
 import Spinner from '../common/Spinner';
 import { GlobalContext } from '../../context/GlobalState';
 
@@ -12,6 +14,7 @@ const RestaurantDetail = () => {
     const { account, contract } = useContext(GlobalContext);
 
     const [data, setData] = useState({deals: []});
+    const [transactionHash, setTransactionHash] = useState('');
     const [loading, setLoading] = useState(false);
     const [go] = useState(true);
 
@@ -34,13 +37,14 @@ const RestaurantDetail = () => {
             setLoading(true);
             const res = await contract.methods.supply().send({ from: account, value: window.web3.utils.toWei(price.toString(), 'Ether') });
             console.log(res);
+            setTransactionHash(res.transactionHash)
+            $('#modal').modal('show');
             setLoading(false);
         }
         catch(err){
             console.error(err);
             setLoading(false);
         }
-        
     }
 
     return(
@@ -97,6 +101,7 @@ const RestaurantDetail = () => {
                     ) : <p className="mt-5 h4 text-danger">No Deals</p>}
                 </div>
             }
+            <TransactionModal transactionHash={transactionHash} />
         </div>
     );
 };

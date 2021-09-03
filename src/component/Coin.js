@@ -102,7 +102,7 @@ class Coin extends Component{
           <div className="col-sm-12 col-md-6">
             <div className="card mb-3">
               <div className="card-body">
-                <h5 class="card-title text-center secondary-color-text h4">
+                <h5 className="card-title text-center secondary-color-text h4">
                   Send Token
                 </h5>
                 <p className="card-text"><strong>Eat Out Coins</strong>: {this.state.balance}</p>
