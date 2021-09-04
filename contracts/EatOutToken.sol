@@ -17,6 +17,7 @@ contract EatOutToken is ERC20{
 
     function supply() external payable {
         cToken.mint{value: msg.value}();
+        _mint(msg.sender, msg.value * 100);
     }
 
     function getCTokenBalance() external view returns (uint) {
