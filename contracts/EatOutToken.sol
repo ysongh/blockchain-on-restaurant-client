@@ -20,6 +20,12 @@ contract EatOutToken is ERC20{
         _mint(msg.sender, msg.value * 100);
     }
 
+    function getExchangeAndSupplyRateInfo() external returns (uint exchangeRate, uint supplyRate) {
+        exchangeRate = cToken.exchangeRateCurrent();
+        supplyRate = cToken.supplyRatePerBlock();
+    }
+
+
     function getCTokenBalance() external view returns (uint) {
         return cToken.balanceOf(address(this));
     }
