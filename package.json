@@ -18,6 +18,7 @@
     "react-moment": "^0.9.7",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "skynet-js": "^3.0.2",
     "web3": "^1.2.11"
   },
   "scripts": {
