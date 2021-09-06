@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import Web3 from 'web3';
 import jwt_decode from 'jwt-decode';
 
 import Logo from '../../assets/logo.png';
+import EatOutToken from '../../abis/EatOutToken.json';
 import { GlobalContext } from '../../context/GlobalState';
 
 const Navbar = () => {
-    const { token, saveToken, logout } = useContext(GlobalContext);
+    const { token, saveToken, logout, account, setAccount, setContract } = useContext(GlobalContext);
 
     const [go] = useState(true);
 
@@ -23,13 +25,50 @@ const Navbar = () => {
         }
     }, [go]);
 
+    async function connectWallet(){
+        await loadWeb3();
+        await loadBlockchainData()
+    }
+
+    async function loadWeb3(){
+        if (window.ethereum) {
+            window.web3 = new Web3(window.ethereum);
+    
+            await window.ethereum.enable();
+        }
+        else if (window.web3) {
+            window.web3 = new Web3(window.web3.currentProvider);
+        }
+        else{
+            window.alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+        }
+    }
+
+    async function loadBlockchainData(){
+        const web3 = window.web3;
+    
+        const accounts = await web3.eth.getAccounts();
+        setAccount(accounts[0]);
+    
+        const networkId = await web3.eth.net.getId();
+        const networkData = EatOutToken.networks[networkId];
+    
+        if(networkData){
+            const eatOutToken = new web3.eth.Contract(EatOutToken.abi, EatOutToken.networks[networkId].address);
+            setContract(eatOutToken);
+        }
+        else{
+            window.alert('Contract is not deployed to detected network')
+        }
+    }
+
     const UserLinks = (
         <>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
                 <Link className="nav-link" to="/profile">Profile</Link>
             </li>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <Link className="nav-link btn secondary-color" to="/" onClick={() => logout()}>Logout</Link>
+                <Link className="btn primary-color mr-2" to="/" onClick={() => logout()}>Logout</Link>
             </li>
         </>
     );
@@ -40,7 +79,7 @@ const Navbar = () => {
                 <Link className="nav-link" to="/login">Login</Link>
             </li>
             <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
-                <Link className="nav-link btn primary-color" to="/register">Get Started</Link>
+                <Link className="btn primary-color mr-2" to="/register">Get Started</Link>
             </li>
         </>
     );
@@ -69,6 +108,11 @@ const Navbar = () => {
                             <Link className="nav-link" to="/coin">Coin</Link>
                         </li>
                         { token ? UserLinks : GuestLinks }
+                        <li className="nav-item" data-toggle="collapse" data-target=".navbar-collapse.show">
+                            <button className="btn secondary-color" onClick={connectWallet}>
+                                {account ? `${account.substring(0,5)}...${account.substring(37,42)}` : "Connect"}
+                            </button>
+                        </li>
                     </ul>
                 </div>
             </div>
