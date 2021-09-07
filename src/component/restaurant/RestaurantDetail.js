@@ -6,14 +6,17 @@ import $ from 'jquery';
 import axios from '../../axios';
 import DefaultImage from '../../assets/noimage.png';
 import TransactionModal from '../common/TransactionModal';
+import TextInput from '../common/TextInput';
 import Spinner from '../common/Spinner';
 import { GlobalContext } from '../../context/GlobalState';
 
 const RestaurantDetail = () => {
     const { id } =  useParams();
-    const { account, contract } = useContext(GlobalContext);
+    const { account, contract, clientSkyDB, publicKey, privateKey } = useContext(GlobalContext);
 
     const [data, setData] = useState({deals: []});
+    const [comment, setComment] = useState('');
+    const [name, setName] = useState('');
     const [transactionHash, setTransactionHash] = useState('');
     const [loading, setLoading] = useState(false);
     const [go] = useState(true);
@@ -46,6 +49,24 @@ const RestaurantDetail = () => {
             setLoading(false);
         }
     }
+
+    async function addComment() {
+        try {
+            const commentData = {
+                date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
+                value: comment,
+                userName: name,
+            }
+    
+            let json = commentData;
+    
+            await clientSkyDB.db.setJSON(privateKey, id, json);
+            setName("");
+            setComment("");
+        } catch (error) {
+            console.log(error);
+        }
+      }
 
     return(
         <div className="container">
@@ -101,6 +122,24 @@ const RestaurantDetail = () => {
                     ) : <p className="mt-5 h4 text-danger">No Deals</p>}
                 </div>
             }
+
+            <hr />
+
+            <h2>Comments</h2>
+            <div>
+                <TextInput
+                    label="Your Name"
+                    type="text"
+                    value={name}
+                    onChange={e => setName(e.target.value)} />
+                <TextInput
+                    label="Comment"
+                    type="text"
+                    value={comment}
+                    onChange={e => setComment(e.target.value)} />
+                <button className="btn btn-lg primary-color" onClick={() => addComment()}>Add Comment</button>
+            </div>
+
             <TransactionModal transactionHash={transactionHash} />
         </div>
     );
