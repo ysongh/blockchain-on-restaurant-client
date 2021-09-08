@@ -1,12 +1,8 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Eat Out Coin",
+  "name": "Eat Out Coin",
+  "description": "A web app that reward customers with tokens when they make a purchase from a restaurant. All sale will be deposit on Compound where restaurant owner can earn interest",
   "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "logo192.png",
       "type": "image/png",
@@ -20,6 +16,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#E7D095",
   "background_color": "#ffffff"
 }
