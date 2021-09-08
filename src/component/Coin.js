@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
+import $ from 'jquery';
 
 import EatOutToken from '../abis/EatOutToken.json';
 import TextInput from './common/TextInput';
 import Spinner from './common/Spinner';
+import TransactionModal from './common/TransactionModal';
 
 class Coin extends Component{
   constructor(props){
@@ -13,6 +15,7 @@ class Coin extends Component{
       amount: '',
       address: '',
       ceth: '',
+      transactionHash: '',
       loading: false,
     }
   }
@@ -85,7 +88,8 @@ class Coin extends Component{
       this.state.eatOutToken.methods.redeem(this.state.ceth).send({ from: this.state.account })
         .once('receipt', (receipt) => {
           console.log(receipt);
-          
+          this.setState({ transactionHash: receipt.transactionHash });
+          $('#modal').modal('show');
         })
       this.setState({ loading : true });
     } catch(err){
@@ -134,6 +138,7 @@ class Coin extends Component{
             
           </div>
         </div>
+        <TransactionModal transactionHash={this.state.transactionHash} />
       </div>
     );
   }

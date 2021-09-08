@@ -38,7 +38,7 @@ const RestaurantDetail = () => {
             try {
               const { data } = await clientSkyDB.db.getJSON(publicKey, id);
               console.log(data);
-              setComments(data);
+              setComments(data || []);
             } catch (error) {
               console.log(error);
             }
