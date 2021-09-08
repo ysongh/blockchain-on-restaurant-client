@@ -1,0 +1,1 @@
+export const SEEDPHASE = 'eat out coin';
