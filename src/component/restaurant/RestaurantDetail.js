@@ -31,8 +31,18 @@ const RestaurantDetail = () => {
                 console.error(err);
             }
         }
+
+        async function getComments() {
+            try {
+              const { data } = await clientSkyDB.db.getJSON(publicKey, id);
+              console.log(data);
+            } catch (error) {
+              console.log(error);
+            }
+          }
         
         getRestaurants();
+        getComments();
     }, [go, id]);
 
     const buyFood = async price => {
@@ -52,13 +62,15 @@ const RestaurantDetail = () => {
 
     async function addComment() {
         try {
+            const { data } = await clientSkyDB.db.getJSON(publicKey, id);
+
             const commentData = {
                 date: `${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`,
                 value: comment,
                 userName: name,
             }
     
-            let json = commentData;
+            let json = data ? [...data, commentData] : [commentData];
     
             await clientSkyDB.db.setJSON(privateKey, id, json);
             setName("");
