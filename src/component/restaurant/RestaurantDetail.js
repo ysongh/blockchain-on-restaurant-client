@@ -46,7 +46,7 @@ const RestaurantDetail = () => {
         
         getRestaurants();
         getComments();
-    }, [go, id]);
+    }, [go, id, clientSkyDB.db, publicKey]);
 
     const buyFood = async price => {
         try{

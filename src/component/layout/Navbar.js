@@ -23,7 +23,7 @@ const Navbar = () => {
                 logout();
             }
         }
-    }, [go]);
+    }, [go, logout, saveToken]);
 
     async function connectWallet(){
         await loadWeb3();

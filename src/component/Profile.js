@@ -37,7 +37,7 @@ const Profile = () => {
         }
         
         getProfile();
-    }, []);
+    }, [ownerId]);
 
     const removeRestaurant = async restaurantId => {
         try{
