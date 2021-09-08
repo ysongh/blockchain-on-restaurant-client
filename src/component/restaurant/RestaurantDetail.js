@@ -16,9 +16,11 @@ const RestaurantDetail = () => {
 
     const [data, setData] = useState({deals: []});
     const [comment, setComment] = useState('');
+    const [comments, setComments] = useState([]);
     const [name, setName] = useState('');
     const [transactionHash, setTransactionHash] = useState('');
     const [loading, setLoading] = useState(false);
+    const [commentLoading, setCommentLoading] = useState(false);
     const [go] = useState(true);
 
     useEffect(() => {
@@ -36,6 +38,7 @@ const RestaurantDetail = () => {
             try {
               const { data } = await clientSkyDB.db.getJSON(publicKey, id);
               console.log(data);
+              setComments(data);
             } catch (error) {
               console.log(error);
             }
@@ -62,6 +65,7 @@ const RestaurantDetail = () => {
 
     async function addComment() {
         try {
+            setCommentLoading(true);
             const { data } = await clientSkyDB.db.getJSON(publicKey, id);
 
             const commentData = {
@@ -75,7 +79,11 @@ const RestaurantDetail = () => {
             await clientSkyDB.db.setJSON(privateKey, id, json);
             setName("");
             setComment("");
+            const res = await clientSkyDB.db.getJSON(publicKey, id);
+            setComments(res.data);
+            setCommentLoading(false);
         } catch (error) {
+            setCommentLoading(false);
             console.log(error);
         }
       }
@@ -138,18 +146,36 @@ const RestaurantDetail = () => {
             <hr />
 
             <h2>Comments</h2>
-            <div>
-                <TextInput
-                    label="Your Name"
-                    type="text"
-                    value={name}
-                    onChange={e => setName(e.target.value)} />
-                <TextInput
-                    label="Comment"
-                    type="text"
-                    value={comment}
-                    onChange={e => setComment(e.target.value)} />
-                <button className="btn btn-lg primary-color" onClick={() => addComment()}>Add Comment</button>
+
+            <div className="row mb-5">
+                <div className="col-12 col-md-6">
+                    <div className="list-group">
+                        { comments.map(c => (
+                            <p className="list-group-item list-group-item-action flex-column align-items-start">
+                                <div className="d-flex w-100 justify-content-between">
+                                    <h5 className="mb-1">{c.userName}</h5>
+                                    <small>{c.date}</small>
+                                </div>
+                                <p className="mb-1">{c.value}</p>
+                            </p>
+                        ))}
+                    </div>
+                </div>
+                <div className="col-12 col-md-6">
+                    <div>
+                        <TextInput
+                            label="Your Name"
+                            type="text"
+                            value={name}
+                            onChange={e => setName(e.target.value)} />
+                        <TextInput
+                            label="Comment"
+                            type="text"
+                            value={comment}
+                            onChange={e => setComment(e.target.value)} />
+                        {commentLoading ? <Spinner /> : <button className="btn btn-lg primary-color" onClick={() => addComment()}>Add Comment</button> }
+                    </div>
+                </div>
             </div>
 
             <TransactionModal transactionHash={transactionHash} />
