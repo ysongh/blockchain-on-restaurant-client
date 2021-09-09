@@ -3,7 +3,16 @@
 
 A web app that reward customers with tokens when they make a purchase from a restaurant. All sale will be deposit on Compound where restaurant owner can earn interest.
 
-# Features
+- HNS decentralized domain = https://aaronrasor.hns.siasky.net/#/
+
+## Tasks
+- [x] Create or fork a DeFi tool and host the front-end on Skynet
+- [x] Adding a working "Save to Homescreen" link in the Github repo (example)
+- [x] Using an ENS or HNS decentralized domain name for the web app
+- [x] Use the Deploy to Skynet Github action for building and deploying your frontend automatically
+- [x] Hosting off-chain, mutable application data on Skynet using SkyDB or MySky
+
+## Features
 - Front-end is hosted on Skynet
 - User can comment the restaurants
 - All comments are stored on SkyDB
@@ -12,7 +21,7 @@ A web app that reward customers with tokens when they make a purchase from a res
 - Customers can redeem these tokens (Eat Out Coin) for discount or prizes
 - Restaurants can promote their menu by creating a profile and menu or deals on this app for customers to see
 
-# Technologies
+## Technologies
 - React
 - Bootstrap 4
 - Solidity
